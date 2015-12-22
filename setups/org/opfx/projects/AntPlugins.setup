@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Project
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    name="org.opfx.ant"
+    label="Ant">
+  <project name="ant-js"
+      label="Ant Javascript Plugin">
+    <stream
+        name="master"
+        label="Master">
+      <description></description>
+    </stream>
+    <description>Provides support for building typedscript projects with ant</description>
+  </project>
+</setup:Project>
