@@ -5,52 +5,36 @@
 	label="Opfx Projects">
 
 	<setupTask xsi:type="setup:VariableTask" id="organization"
-		name="organization" defaultValue="opfx" label="Organization">
+		name="organization" defaultValue="" label="Organization">
 		<description>The name of the organization </description>
 	</setupTask>
 
 
-	<setupTask xsi:type="setup:CompoundTask" name="Installation Variables">
-
-		<setupTask xsi:type="setup:VariableTask" type="FOLDER" name="install.root"
-			value="" defaultValue="" label="The installation root folder" />
-
-		<setupTask xsi:type="setup:VariableTask" type="FOLDER"
-			name="installation.location" label="The installation root folder"
-			defaultValue="${install.root/}" />
-
-
-		<setupTask xsi:type="setup:VariableTask" name="installation.id"
-			defaultValue="${organization}" />
-
-
-	</setupTask>
-
-
-
 	<setupTask xsi:type="setup:CompoundTask" name="Workspace Variables">
-
+		
 		<setupTask xsi:type="setup:VariableTask" type="FOLDER"
-			name="workspace.container.root" defaultValue="${install.root/}${organization/}proj"
-			label="Workspace container folder">
-			<description>The root workspace folder containing all the project
-				workspaces
-			</description>
+			id="projs.location"
+			name="projs.location" 
+			defaultValue=""
+			label="Workspaces container folder">
+			<description></description>
 		</setupTask>
-
-		<setupTask xsi:type="setup:VariableTask" name="workspace.id"
-			label="Project workspace folder" defaultValue="${scope.project.catalog.name/}${scope.project.name/}${scope.project.stream.name}" />
-
+		
 		<setupTask xsi:type="setup:VariableTask" type="FOLDER"
-			name="installation.location" label="Installation location"
-			defaultValue="${install.root/}${organization/}${scope.project.name/}${scope.project.stream.name}/" />
+			id="workspace.location"
+			name="workspace.location" 
+			value="${projs.location/}${organization/}${scope.project.name/}"
+			label="Project's workspace">
+			<description>The location of the project's workspace</description>
+		</setupTask>
 
 	</setupTask>
 
 	<setupTask xsi:type="setup:WorkspaceTask" id="workspace" />
  
 	<project href="projects/GeneralProjects.setup#/" />
+	<!-- 
 	<project href="projects/AntPlugins.setup#/" />
-	 
+ -->	 
 	<description>The opfx's Eclipse based projects catalog</description>
 </setup:ProjectCatalog>
