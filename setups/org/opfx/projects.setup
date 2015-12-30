@@ -1,40 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<setup:ProjectCatalog xmi:version="2.0"
-	xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:setup="http://www.eclipse.org/oomph/setup/1.0" name="org.opfx.projects"
-	label="Opfx Projects">
-
-	<setupTask xsi:type="setup:VariableTask" id="organization"
-		name="organization" defaultValue="" label="Organization">
-		<description>The name of the organization </description>
-	</setupTask>
-
-
-	<setupTask xsi:type="setup:CompoundTask" name="Workspace Variables">
-		
-		<setupTask xsi:type="setup:VariableTask" type="FOLDER"
-			id="projs.location"
-			name="projs.location" 
-			defaultValue=""
-			label="Workspaces container folder">
-			<description></description>
-		</setupTask>
-		
-		<setupTask xsi:type="setup:VariableTask" type="FOLDER"
-			id="workspace.location"
-			name="workspace.location" 
-			value="${projs.location/}${organization/}${scope.project.name/}"
-			label="Project's workspace">
-			<description>The location of the project's workspace</description>
-		</setupTask>
-
-	</setupTask>
-
-	<setupTask xsi:type="setup:WorkspaceTask" id="workspace" />
- 
-	<project href="projects/GeneralProjects.setup#/" />
-	<!-- 
-	<project href="projects/AntPlugins.setup#/" />
- -->	 
-	<description>The opfx's Eclipse based projects catalog</description>
+<setup:ProjectCatalog
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    name="org.eclipse"
+    label="Opfx Projects">
+  <annotation
+      source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+    <detail
+        key="imageURI">
+      <value>https://raw.githubusercontent.com/github-archive/media/master/octocats/blacktocat-32.png</value>
+    </detail>
+    <detail
+        key="siteURI">
+      <value>https://github.com/</value>
+    </detail>
+  </annotation>
+  <project href="projects/GeneralProjects.setup#/"/>
+  <project href="projects/AntPlugins.setup#/"/>
+  <description>The opfx's Eclipse based projects catalog</description>
 </setup:ProjectCatalog>

@@ -2,14 +2,26 @@
 <setup:Project
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
-    name="org.opfx.projects"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore"
+    name="general"
     label="General">
   <project name="project"
       label="Project">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.oomph.uri"
+        location="${installation.location/}../../repo/oomph"
+        remoteURI="git://git.eclipse.org/gitroot/oomph/org.eclipse.oomph.git">
+      <description>Oomph Git Clone</description>
+    </setupTask>
     <stream
-        name="master"
-        label="Master"/>
+        name="master"/>
     <description>An empty project</description>
   </project>
+  <logicalProjectContainer
+      xsi:type="setup:ProjectCatalog"
+      href="index:/org.eclipse.setup#//@projectCatalogs[name='org.eclipse']"/>
 </setup:Project>
