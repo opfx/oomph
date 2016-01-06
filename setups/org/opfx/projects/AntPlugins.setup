@@ -9,7 +9,7 @@
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/projects/1.0 index:/models/Projects.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore"
     name="ant"
     label="Ant">
   <setupTask
@@ -503,6 +503,16 @@
   <project name="ant-js"
       label="Javascript Plugin">
     <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="TypeScript">
+      <requirement
+          name="com.palantir.typescript.feature.feature.group"
+          versionRange="[1.7.0,1.8.0)"
+          filter=""/>
+      <repository
+          url="http://eclipse-update.palantir.com/eclipse-typescript/"/>
+    </setupTask>
+    <setupTask
         xsi:type="setup:CompoundTask"
         name="Tasks">
       <setupTask
@@ -554,6 +564,209 @@
   </project>
   <project name="ant-php"
       label="PHP Plugin">
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        label="Zend Studio">
+      <requirement
+          name="com.zend.php.productivity.feature.group"
+          versionRange="13.0.0"
+          filter=""/>
+      <repository
+          url="http://downloads.zend.com/studio-eclipse/updates/13_0"/>
+      <repository
+          url="http://downloads.zend.com/studio-eclipse4/updates"/>
+      <repository
+          url="http://downloads.zend.com/studio-eclipse4/updates-extra"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Tasks">
+      <setupTask
+          xsi:type="git:GitCloneTask"
+          id="git.clone.org.opfx.ant.php"
+          remoteURI="https://${github.user.id|username}@github.com/opfx/${scope.project.name}.git">
+        <description>PHP Ant Plugin</description>
+      </setupTask>
+      <setupTask
+          xsi:type="projects:ProjectsImportTask">
+        <sourceLocator
+            rootFolder="${git.clone.org.opfx.ant.php.location}"
+            locateNestedProjects="true"/>
+      </setupTask>
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          id=""
+          connectorKind="github"
+          repositoryURL="https://github.com/opfx/${scope.project.name}"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="${scope.project.label} open"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+        <query
+            summary="${scope.project.label} resolved">
+          <attribute
+              key="state"
+              value="closed::"/>
+        </query>
+        <description>Mylyn Query</description>
+      </setupTask>
+      <setupTask
+          xsi:type="mylyn:MylynBuildsTask"
+          serverURL="https://jenkins-opfx.rhcloud.com/"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <buildPlan
+            name="${scope.project.name}"/>
+      </setupTask>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        id=""
+        name="Preferences">
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          name="PHP">
+        <setupTask
+            xsi:type="setup:CompoundTask"
+            name="Appearance">
+          <setupTask
+              xsi:type="setup:PreferenceTask"
+              key="/instance/org.eclipse.dltk.ui/org.eclipse.dltk.ui.methodreturntype"
+              value="true"/>
+        </setupTask>
+        <setupTask
+            xsi:type="setup:CompoundTask"
+            name="Code Style">
+          <setupTask
+              xsi:type="setup:CompoundTask"
+              id="org.eclipse.php.formatter.core"
+              name="Formatter">
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/insert_space_after_opening_paren_in_declare"
+                value="false"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/insert_space_before_closing_paren_in_declare"
+                value="false"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/insert_space_before_opening_paren_in_declare"
+                value="false"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.alignment_for_expressions_in_array_initializer_line_wrap_policy"
+                value="1"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.comment.format_block_comments"
+                value="false"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.comment.format_header"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.comment.format_line_comments"
+                value="false"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.comment.insert_new_line_for_parameter"
+                value="false"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.comment.line_length"
+                value="120"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.format_line_comment_starting_on_first_column"
+                value="false"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_new_line_before_closing_brace_in_array_initializer"
+                value="false"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_array_creation"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_for"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_if"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_method_declaration"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_parenthesized_expression"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_switch"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_if"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_method_declaration"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_parenthesized_expression"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_switch"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_before_opening_bracket_in_array_reference"
+                value="false"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_for"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_method_invocation"
+                value="false"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.never_indent_line_comments_on_first_column"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.tabulation.size"
+                value="0"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.formatter.core.formatter.use_on_off_tags"
+                value="true"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/org.eclipse.php.ui.formatterprofiles"
+                value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&#xD;&#xA;&lt;profiles>&#xD;&#xA;&lt;profile name=&quot;PHP Conventions [OPFX]&quot;>&#xD;&#xA;&lt;setting id=&quot;indentationChar&quot; value=&quot;&amp;#9;&quot;/>&#xD;&#xA;&lt;setting id=&quot;insert_space_after_opening_paren_in_declare&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;insert_space_before_closing_paren_in_declare&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;insert_space_before_opening_paren_in_declare&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.core.formatter.insert_new_line_in_function_invoke&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_arguments_in_allocation_expression_force_split&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_arguments_in_allocation_expression_indent_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_arguments_in_allocation_expression_line_wrap_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_arguments_in_method_invocation_force_split&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_arguments_in_method_invocation_indent_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_arguments_in_method_invocation_line_wrap_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_assignment_force_split&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_assignment_indent_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_assignment_line_wrap_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_binary_expression_force_split&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_binary_expression_indent_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_binary_expression_line_wrap_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_compact_if_force_split&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_compact_if_indent_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_compact_if_line_wrap_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_conditional_expression_force_split&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_conditional_expression_indent_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_conditional_expression_line_wrap_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_expressions_in_array_initializer_force_split&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_expressions_in_array_initializer_indent_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_expressions_in_array_initializer_line_wrap_policy&quot; value=&quot;1&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_parameters_in_method_declaration_force_split&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_parameters_in_method_declaration_indent_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_parameters_in_method_declaration_line_wrap_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_superclass_in_type_declaration_force_split&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_superclass_in_type_declaration_indent_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_superclass_in_type_declaration_line_wrap_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_superinterfaces_in_type_declaration_force_split&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_superinterfaces_in_type_declaration_indent_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.alignment_for_superinterfaces_in_type_declaration_line_wrap_policy&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.blank_lines_before_field&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.blank_lines_before_member_type&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.blank_lines_before_method&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.blank_lines_between_type_declarations&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.brace_position_for_block&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.brace_position_for_lambda_function_declaration&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.brace_position_for_method_declaration&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.brace_position_for_switch&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.brace_position_for_type_declaration&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.clear_blank_lines_in_block_comment&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.clear_blank_lines_in_javadoc_comment&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.format_block_comments&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.format_header&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.format_html&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.format_javadoc_comments&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.format_line_comments&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.format_source_code&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.indent_parameter_description&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.indent_root_tags&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.insert_new_line_before_root_tags&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.insert_new_line_for_parameter&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.line_length&quot; value=&quot;120&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.new_lines_at_block_boundaries&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.new_lines_at_javadoc_boundaries&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.comment.preserve_white_space_between_code_and_line_comments&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.continuation_indentation&quot; value=&quot;2&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.continuation_indentation_for_array_initializer&quot; value=&quot;2&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.disabling_tag&quot; value=&quot;@formatter:off&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.enabling_tag&quot; value=&quot;@formatter:on&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.format_guardian_clause_on_one_line&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.format_line_comment_starting_on_first_column&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.indent_body_declarations_compare_to_type_header&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.indent_breaks_compare_to_cases&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.indent_empty_lines&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.indent_statements_compare_to_block&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.indent_statements_compare_to_body&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.indent_switchstatements_compare_to_cases&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.indent_switchstatements_compare_to_switch&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.indentation.size&quot; value=&quot;1&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_new_line_after_opening_brace_in_array_initializer&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_new_line_before_catch_in_try_statement&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_new_line_before_closing_brace_in_array_initializer&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_new_line_before_else_in_if_statement&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_new_line_before_finally_in_try_statement&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_new_line_before_while_in_do_statement&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_new_line_in_empty_block&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_new_line_in_empty_method_body&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_new_line_in_empty_type_declaration&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_arrow_in_array_creation&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_arrow_in_field_access&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_arrow_in_foreach&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_arrow_in_method_invocation&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_arrow_in_yield&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_assignment_operator&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_binary_operator&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_closing_brace_in_block&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_closing_paren_in_cast&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_colon_in_conditional&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_coloncolon_in_field_access&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_coloncolon_in_method_invocation&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_comma_in_array_creation&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_comma_in_echo&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_comma_in_for_inits&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_comma_in_global&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_comma_in_list&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_comma_in_method_declaration_parameters&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_comma_in_method_invocation_arguments&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_comma_in_multiple_constant_declarations&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_comma_in_multiple_field_declarations&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_comma_in_static&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_comma_in_superinterfaces&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_bracket_in_array_reference&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_array_creation&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_cast&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_catch&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_for&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_foreach&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_if&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_list&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_method_declaration&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_method_invocation&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_parenthesized_expression&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_switch&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_opening_paren_in_while&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_postfix_operator&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_prefix_operator&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_question_in_conditional&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_semicolon_in_for&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_after_unary_operator&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_arrow_in_array_creation&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_arrow_in_field_access&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_arrow_in_foreach&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_arrow_in_method_invocation&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_arrow_in_yield&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_assignment_operator&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_binary_operator&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_bracket_in_array_reference&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_array_creation&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_cast&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_catch&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_for&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_foreach&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_if&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_list&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_method_declaration&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_method_invocation&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_parenthesized_expression&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_switch&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_closing_paren_in_while&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_colon_in_case&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_colon_in_conditional&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_colon_in_default&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_coloncolon_in_field_access&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_coloncolon_in_method_invocation&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_comma_in_array_creation&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_comma_in_echo&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_comma_in_for_inits&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_comma_in_global&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_comma_in_list&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_comma_in_method_declaration_parameters&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_comma_in_method_invocation_arguments&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_comma_in_multiple_constant_declarations&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_comma_in_multiple_field_declarations&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_comma_in_static&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_comma_in_superinterfaces&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_brace_in_block&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_brace_in_method_declaration&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_brace_in_switch&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_brace_in_type_declaration&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_bracket_in_array_reference&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_array_creation&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_catch&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_for&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_foreach&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_if&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_list&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_method_declaration&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_method_invocation&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_switch&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_opening_paren_in_while&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_postfix_operator&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_prefix_operator&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_question_in_conditional&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_semicolon&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_semicolon_in_for&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_before_unary_operator&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_between_brackets_in_array_type_reference&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_between_empty_parens_in_method_declaration&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.insert_space_between_empty_parens_in_method_invocation&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.join_lines_in_comments&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.keep_else_statement_on_same_line&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.keep_elseif_statement_on_same_line&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.keep_imple_if_on_one_line&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.keep_then_statement_on_same_line&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.lineSplit&quot; value=&quot;300&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.never_indent_block_comments_on_first_column&quot; value=&quot;false&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.never_indent_line_comments_on_first_column&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.number_of_blank_lines_after_namespace&quot; value=&quot;1&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.number_of_blank_lines_after_use_statements&quot; value=&quot;1&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.number_of_blank_lines_at_beginning_of_method_body&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.number_of_blank_lines_at_end_of_class_body&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.number_of_blank_lines_at_end_of_method_body&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.number_of_blank_lines_before_namespace&quot; value=&quot;1&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.number_of_blank_lines_before_use_statements&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.number_of_blank_lines_between_namespaces&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.number_of_blank_lines_between_use_statements&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.number_of_empty_lines_to_preserve&quot; value=&quot;1&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.put_empty_statement_on_new_line&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.tabulation.size&quot; value=&quot;0&quot;/>&#xD;&#xA;&lt;setting id=&quot;org.eclipse.php.formatter.core.formatter.use_on_off_tags&quot; value=&quot;true&quot;/>&#xD;&#xA;&lt;/profile>&#xD;&#xA;&lt;/profiles>&#xD;&#xA;"/>
+            <setupTask
+                xsi:type="setup:PreferenceTask"
+                key="/instance/org.eclipse.php.formatter.core/formatterProfile"
+                value="_PHP Conventions [OPFX]"/>
+          </setupTask>
+        </setupTask>
+      </setupTask>
+      <description></description>
+    </setupTask>
     <stream
         name="master"/>
     <description></description>
