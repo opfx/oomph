@@ -516,6 +516,14 @@
 			<description>The user ID of the Github account</description>
 		</setup:VariableTask>
   </setupTask>
+  <setupTask
+      xsi:type="setup:EclipseIniTask"
+      excludedTriggers="STARTUP"
+      option="-Dperspective"
+      value="=org.eclipse.jdt.ui.JavaPerspective"
+      vm="true">
+    <description></description>
+  </setupTask>
   <project label="Generic Plugin">
     <stream
         name="master"
