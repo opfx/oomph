@@ -61,7 +61,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
-      name="User Preferences">
+      name="Preferences">
     <setupTask
         xsi:type="setup:CompoundTask"
         name="General">
