@@ -162,7 +162,9 @@
         <setupTask
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.egit.core/core_defaultRepositoryDir"
-            value="${git.container.root}"/>
+            value="${gitrepo.container.root}">
+          <description></description>
+        </setupTask>
       </setupTask>
     </setupTask>
     <description></description>

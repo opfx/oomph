@@ -503,7 +503,7 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="git.clone.ant.js"
-          location="${git.container.root/}/${scope.project.name}"
+          location="${gitrepo.container.root/}${scope.project.name}"
           remoteURI="https://${github.user.id|username}@github.com/opfx/${scope.project.name}.git">
         <description>Javascript Ant Plugin</description>
       </setupTask>
@@ -570,7 +570,7 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="git.clone.org.opfx.ant.php"
-          location="${git.container.root/}/${scope.project.name}"
+          location="${gitrepo.container.root/}/${scope.project.name}"
           remoteURI="https://${github.user.id|username}@github.com/opfx/${scope.project.name}.git">
         <description>PHP Ant Plugin</description>
       </setupTask>

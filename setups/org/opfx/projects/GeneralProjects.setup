@@ -41,7 +41,7 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="git.clone.general.oomph"
-          location="${git.container.root/}/${scope.project.name}"
+          location="${gitrepo.container.root/}/${scope.project.name}"
           remoteURI="https://${github.user.id|username}@github.com/opfx/${scope.project.name}.git"
           pushURI="">
         <description>Clone the oomph setup repository</description>

@@ -51,28 +51,46 @@
       name="Installation Variables">
     <setupTask
         xsi:type="setup:VariableTask"
-        id="tools.location"
+        id="product.container.root"
         type="FOLDER"
-        name="tools.location"
-        defaultValue=""
-        label="Tools directory">
-      <description>The directory where tools are being installed to</description>
+        name="product.container.root"
+        defaultValue="${user.home/eclipse}"
+        label="Product container folder"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="project.container.root"
+        type="FOLDER"
+        name="project.container.root"
+        defaultValue="${user.home/eclipse/ws}"
+        label="Workspace container folder">
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="gitrepo.container.root"
+        type="FOLDER"
+        name="gitrepo.container.root"
+        defaultValue="${user.home/.git}"
+        label="Git local repository clone container folder">
+      <description></description>
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
         id="installation.location"
         type="FOLDER"
         name="installation.location"
-        value="${tools.location}/eclipse"
-        defaultValue="${tools.location}/eclipse"/>
+        value="${product.container.root/eclipse/|lower}"
+        defaultValue="">
+      <description></description>
+    </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
         id="workspace.location"
         type="FOLDER"
         name="workspace.location"
-        value="${installation.location/proj/|lower}${scope.project.name/|lower}"
-        label="Project's workspace">
-      <description>The location of the project's workspace</description>
+        defaultValue="$${project.container.root/}${scope.project.name|lower}"
+        label="${scope.project.label}'s workspace">
+      <description>The location of the project's workspace ${project.container.root}</description>
     </setupTask>
   </setupTask>
   <product name="org.eclipse.platform.ide"
