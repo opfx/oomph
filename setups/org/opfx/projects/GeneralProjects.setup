@@ -29,6 +29,8 @@
     <requirement
         name="org.eclipse.mylyn.builds.feature.group"/>
     <requirement
+        name="org.eclipse.mylyn.hudson.feature.group"/>
+    <requirement
         name="org.eclipse.mylyn.ide_feature.feature.group"/>
     <repository
         url="http://download.eclipse.org/egit/github/updates/"/>
