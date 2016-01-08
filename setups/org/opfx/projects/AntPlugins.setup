@@ -61,120 +61,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
-      id="org.eclipse.ant.variables"
-      name="Variables">
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="github.user.id"
-        defaultValue="anonymous"
-        label="Github user ID"
-        documentation="The Eclipse user ID for Git/Gerrit commits.  Use 'anonymous' if you have no Eclipse user ID.">
-      <description>The user ID of the Github account</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        type="PASSWORD"
-        name="github.user.password"
-        label="Github password for issues">
-      <annotation
-          source="http://www.eclipse.org/oomph/setup/PasswordVerificationDisabled">
-        <detail
-            key="type">
-          <value>form</value>
-        </detail>
-        <detail
-            key="form.url">
-          <value>https://github.com/session</value>
-        </detail>
-        <detail
-            key="form.cookie">
-          <value>PHPSESSID</value>
-        </detail>
-        <detail
-            key="form.parameters">
-          <value>login password authenticity_token utf8 commit</value>
-        </detail>
-        <detail
-            key="form.secure.parameters">
-          <value>password</value>
-        </detail>
-        <detail
-            key="form.filter">
-          <value>login=anonymous\&amp;.*</value>
-        </detail>
-        <detail
-            key="form.parameter.login">
-          <value>$${github.user.id}</value>
-        </detail>
-        <detail
-            key="form.parameter.password">
-          <value>$${value}</value>
-        </detail>
-        <detail
-            key="form.parameter.utf8">
-          <value>✓</value>
-        </detail>
-        <detail
-            key="form.parameter.commit">
-          <value>Sign in</value>
-        </detail>
-        <detail
-            key="form.ok">
-          <value>Valid password for $${form.parameter.login} at $${form.url}.</value>
-        </detail>
-        <detail
-            key="form.info">
-          <value>
-            Validate the password for $${form.parameter.login} at
-            $${form.url}.
-          </value>
-        </detail>
-        <detail
-            key="form.warning">
-          <value>
-            Unable to validate the password for $${form.parameter.login}
-            because $${form.url} is unreachable.
-          </value>
-        </detail>
-        <detail
-            key="form.error">
-          <value>
-            Invalid password for $${form.parameter.login} at
-            $${form.url}.
-          </value>
-        </detail>
-      </annotation>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        name="github.remoteURIs"
-        label="Github repository">
-      <choice
-          value="git@github.com:@{remoteURI}.git"
-          label="Git (read-write)"/>
-      <choice
-          value="https://${github.user.id|username}@github.com/@{remoteURI}.git"
-          label="HTTPS (read-write)">
-        <annotation
-            source="http://www.eclipse.org/oomph/setup/MatchChoice"/>
-      </choice>
-      <choice
-          value="https://github.com/@{remoteURI}.git"
-          label="HTTPS (read-only, anonymous)"/>
-      <description>Choose from the available Github URIs</description>
-    </setupTask>
-    <setup:VariableTask
-        name="github.user.id"
-        defaultValue="anonymous"
-        label="Github user ID"
-        xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
-        xmlns:xmi="http://www.omg.org/XMI">
-			<description>The user ID of the Github account</description>
-		</setup:VariableTask>
-  </setupTask>
-  <setupTask
-      xsi:type="setup:CompoundTask"
-      name="Preferences">
+      name="User Preferences">
     <setupTask
         xsi:type="setup:CompoundTask"
         name="General">
@@ -207,18 +94,6 @@
             value="true">
           <description>Automatic Ant Enablement</description>
         </setupTask>
-      </setupTask>
-      <setupTask
-          xsi:type="setup:CompoundTask"
-          name="Perspectives">
-        <setupTask
-            xsi:type="setup:PreferenceTask"
-            id=""
-            key="/instance/org.eclipse.ui/defaultPerspectiveId"
-            value="org.eclipse.jdt.ui.JavaPerspective">
-          <description>Make the Java perspective the default perspective</description>
-        </setupTask>
-        <description>Container for the &quot;Window->Preferences->General->Perspectives&quot; preferences</description>
       </setupTask>
     </setupTask>
     <setupTask
@@ -502,10 +377,6 @@
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.egit.core/core_autoIgnoreDerivedResources"
             value="false"/>
-        <setupTask
-            xsi:type="setup:PreferenceTask"
-            key="/instance/org.eclipse.egit.core/core_defaultRepositoryDir"
-            value="${git.container.root}"/>
       </setupTask>
     </setupTask>
     <description></description>
@@ -521,12 +392,117 @@
     </description>
   </setupTask>
   <setupTask
-      xsi:type="setup:EclipseIniTask"
-      excludedTriggers="STARTUP"
-      option="-Dperspective"
-      value="=org.eclipse.jdt.ui.JavaPerspective"
-      vm="true">
-    <description></description>
+      xsi:type="setup:CompoundTask"
+      id="org.eclipse.ant.variables"
+      name="Variables">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="github.user.id"
+        defaultValue="anonymous"
+        label="Github user ID"
+        documentation="The Eclipse user ID for Git/Gerrit commits.  Use 'anonymous' if you have no Eclipse user ID.">
+      <description>The user ID of the Github account</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        type="PASSWORD"
+        name="github.user.password"
+        label="Github password for issues">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/PasswordVerificationDisabled">
+        <detail
+            key="type">
+          <value>form</value>
+        </detail>
+        <detail
+            key="form.url">
+          <value>https://github.com/session</value>
+        </detail>
+        <detail
+            key="form.cookie">
+          <value>PHPSESSID</value>
+        </detail>
+        <detail
+            key="form.parameters">
+          <value>login password authenticity_token utf8 commit</value>
+        </detail>
+        <detail
+            key="form.secure.parameters">
+          <value>password</value>
+        </detail>
+        <detail
+            key="form.filter">
+          <value>login=anonymous\&amp;.*</value>
+        </detail>
+        <detail
+            key="form.parameter.login">
+          <value>$${github.user.id}</value>
+        </detail>
+        <detail
+            key="form.parameter.password">
+          <value>$${value}</value>
+        </detail>
+        <detail
+            key="form.parameter.utf8">
+          <value>✓</value>
+        </detail>
+        <detail
+            key="form.parameter.commit">
+          <value>Sign in</value>
+        </detail>
+        <detail
+            key="form.ok">
+          <value>Valid password for $${form.parameter.login} at $${form.url}.</value>
+        </detail>
+        <detail
+            key="form.info">
+          <value>
+            Validate the password for $${form.parameter.login} at
+            $${form.url}.
+          </value>
+        </detail>
+        <detail
+            key="form.warning">
+          <value>
+            Unable to validate the password for $${form.parameter.login}
+            because $${form.url} is unreachable.
+          </value>
+        </detail>
+        <detail
+            key="form.error">
+          <value>
+            Invalid password for $${form.parameter.login} at
+            $${form.url}.
+          </value>
+        </detail>
+      </annotation>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="github.remoteURIs"
+        label="Github repository">
+      <choice
+          value="git@github.com:@{remoteURI}.git"
+          label="Git (read-write)"/>
+      <choice
+          value="https://${github.user.id|username}@github.com/@{remoteURI}.git"
+          label="HTTPS (read-write)">
+        <annotation
+            source="http://www.eclipse.org/oomph/setup/MatchChoice"/>
+      </choice>
+      <choice
+          value="https://github.com/@{remoteURI}.git"
+          label="HTTPS (read-only, anonymous)"/>
+      <description>Choose from the available Github URIs</description>
+    </setupTask>
+    <setup:VariableTask
+        name="github.user.id"
+        defaultValue="anonymous"
+        label="Github user ID"
+        xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+        xmlns:xmi="http://www.omg.org/XMI">
+			<description>The user ID of the Github account</description>
+		</setup:VariableTask>
   </setupTask>
   <project label="Generic Plugin">
     <stream
@@ -552,7 +528,6 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="git.clone.ant.js"
-          location="${git.container.root/}/${scope.project.name}"
           remoteURI="https://${github.user.id|username}@github.com/opfx/${scope.project.name}.git">
         <description>Javascript Ant Plugin</description>
       </setupTask>
@@ -619,7 +594,6 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="git.clone.org.opfx.ant.php"
-          location="${git.container.root/}/${scope.project.name}"
           remoteURI="https://${github.user.id|username}@github.com/opfx/${scope.project.name}.git">
         <description>PHP Ant Plugin</description>
       </setupTask>
