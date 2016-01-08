@@ -190,26 +190,6 @@
       </setupTask>
       <setupTask
           xsi:type="setup:CompoundTask"
-          name="Editors">
-        <setupTask
-            xsi:type="setup:CompoundTask"
-            name="Text Editors">
-          <setupTask
-              xsi:type="setup:PreferenceTask"
-              key="/instance/org.eclipse.ui.editors/lineNumberRuler"
-              value="true"/>
-        </setupTask>
-      </setupTask>
-      <setupTask
-          xsi:type="setup:CompoundTask"
-          name="Keys">
-        <setupTask
-            xsi:type="setup:PreferenceTask"
-            key="/instance/org.eclipse.ui.workbench/org.eclipse.ui.commands"
-            value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;org.eclipse.ui.commands>&#xD;&#xA;&lt;keyBinding contextId=&quot;org.eclipse.ui.contexts.window&quot; keyConfigurationId=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot; keySequence=&quot;CTRL+F6&quot;/>&#xD;&#xA;&lt;keyBinding contextId=&quot;org.eclipse.ui.contexts.window&quot; keyConfigurationId=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot; keySequence=&quot;CTRL+F6&quot;/>&#xD;&#xA;&lt;keyBinding commandId=&quot;org.eclipse.ui.window.nextEditor&quot; contextId=&quot;org.eclipse.ui.contexts.window&quot; keyConfigurationId=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot; keySequence=&quot;CTRL+TAB&quot;/>&#xD;&#xA;&lt;/org.eclipse.ui.commands>"/>
-      </setupTask>
-      <setupTask
-          xsi:type="setup:CompoundTask"
           name="Perspectives">
         <setupTask
             xsi:type="setup:PreferenceTask"
@@ -490,22 +470,6 @@
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.wizards.srcBinFoldersBinName"
             value="/build/classes"/>
-      </setupTask>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:CompoundTask"
-        name="Team">
-      <setupTask
-          xsi:type="setup:CompoundTask"
-          name="Git">
-        <setupTask
-            xsi:type="setup:PreferenceTask"
-            key="/instance/org.eclipse.egit.core/core_autoIgnoreDerivedResources"
-            value="false"/>
-        <setupTask
-            xsi:type="setup:PreferenceTask"
-            key="/instance/org.eclipse.egit.core/core_defaultRepositoryDir"
-            value="${git.container.root}"/>
       </setupTask>
     </setupTask>
     <description></description>
