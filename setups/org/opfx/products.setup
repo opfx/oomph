@@ -1,229 +1,325 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<setup:ProductCatalog xmi:version="2.0"
-	xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:setup="http://www.eclipse.org/oomph/setup/1.0" xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-	name="org.opfx.products" label="Products">
-	<setupTask xsi:type="setup:InstallationTask" id="installation">
-		<description></description>
-	</setupTask>
-	<setupTask xsi:type="setup:WorkspaceTask" id="workspace" />
-	
-	<setupTask xsi:type="setup:ResourceCreationTask"
-		content="MAX_RECENT_WORKSPACES=5&#xA;RECENT_WORKSPACES=${workspace.location|property}&#xA;RECENT_WORKSPACES_PROTOCOL=3&#xA;SHOW_WORKSPACE_SELECTION_DIALOG=true&#xA;eclipse.preferences.version=1&#xA;"
-		targetURL="configuration:/.settings/org.eclipse.ui.ide.prefs"
-		encoding="UTF-8">
-		<description>
-			Suppress prompt for default workspace already upon very
-			first start
-		</description>
-	</setupTask>
-	
-	
-	<setupTask xsi:type="setup.p2:P2Task"
-		licenseConfirmationDisabled="true">
-		<requirement name="org.eclipse.oomph.setup.feature.group" />
-		<requirement name="org.eclipse.egit.feature.group" versionRange="[4.1.1,4.1.2)"/>
-		
-		<repository url="${oomph.update.url}" />
-		<repository
-			url="http://download.eclipse.org/modeling/emf/emf/updates/2.10/core/R201405190339" />
-		<repository url="http://download.eclipse.org/egit/updates" />	
-		<description></description>
-	</setupTask>
-	
-	<setupTask xsi:type="setup:EclipseIniTask" option="-Doomph.setup"
-		value="=true" vm="true" />
-	<setupTask xsi:type="setup:CompoundTask" name="Installation Variables">
-		
-		<setupTask xsi:type="setup:VariableTask" id="tools.location"
-			type="FOLDER" name="tools.location" defaultValue="" label="Tools directory">
-			<description>The directory where tools are being installed to
-			</description>
-		</setupTask>
-		
-		<setupTask xsi:type="setup:VariableTask" id="installation.location"
-			type="FOLDER" name="installation.location" value="${tools.location}/eclipse"
-			defaultValue="${tools.location}/eclipse">
-		</setupTask>
-		
-		<setupTask xsi:type="setup:VariableTask" id="workspace.location"
-			type="FOLDER" name="workspace.location"
-			value="${installation.location/}proj/${scope.project.name/}"
-			label="Project's workspace">
-			<description>The location of the project's workspace</description>
-		</setupTask>
-	</setupTask>
-
-
-	<product name="org.eclipse.platform.ide" label="Eclipse Platform">
-		<version name="latest" label="Latest (Neon)"
-			requiredJavaVersion="1.8">
-			<annotation source="http://www.eclipse.org/oomph/setup/BrandingInfo">
-				<detail key="siteURI">
-					<value>http://download.eclipse.org/eclipse/downloads/drops4/S-4.6M3-201510291100/
-					</value>
-				</detail>
-				<detail key="folderName">
-					<value>neon</value>
-				</detail>
-				<detail key="folderName.macosx">
-					<value>neon</value>
-				</detail>
-			</annotation>
-			<setupTask xsi:type="setup.p2:P2Task" label="Eclipse Platform (Neon)">
-				<requirement name="org.eclipse.platform.ide"
-					versionRange="[4.6.0,5.0.0)" />
-				<requirement name="org.eclipse.platform.feature.group"
-					versionRange="[4.6.0,5.0.0)" />
-				<requirement name="org.eclipse.rcp.feature.group"
-					versionRange="[4.6.0,5.0.0)" />
-				<repository
-					url="http://download.eclipse.org/technology/epp/packages/neon/M3" />
-				<repository url="http://download.eclipse.org/releases/neon/201511131000" />
-			</setupTask>
-		</version>
-		<version name="latest.released" label="Latest Release (Mars)"
-			requiredJavaVersion="1.7">
-			<annotation source="http://www.eclipse.org/oomph/setup/BrandingInfo">
-				<detail key="siteURI">
-					<value>http://download.eclipse.org/eclipse/downloads/drops4/R-4.5.1-201509040015/
-					</value>
-				</detail>
-				<detail key="folderName">
-					<value>mars</value>
-				</detail>
-				<detail key="folderName.macosx">
-					<value>mars</value>
-				</detail>
-			</annotation>
-			<setupTask xsi:type="setup.p2:P2Task" label="Eclipse Platform (Mars)">
-				<requirement name="org.eclipse.platform.ide"
-					versionRange="[4.5.0,4.6.0)" />
-				<requirement name="org.eclipse.platform.feature.group"
-					versionRange="[4.5.0,4.6.0)" />
-				<requirement name="org.eclipse.rcp.feature.group"
-					versionRange="[4.5.0,4.6.0)" />
-				<repository
-					url="http://download.eclipse.org/technology/epp/packages/mars" />
-				<repository url="http://download.eclipse.org/releases/mars/201510021000" />
-			</setupTask>
-		</version>
-		<version name="neon" label="Neon" requiredJavaVersion="1.8">
-			<annotation source="http://www.eclipse.org/oomph/setup/BrandingInfo">
-				<detail key="siteURI">
-					<value>http://download.eclipse.org/eclipse/downloads/drops4/S-4.6M3-201510291100/
-					</value>
-				</detail>
-				<detail key="folderName">
-					<value>neon</value>
-				</detail>
-				<detail key="folderName.macosx">
-					<value>neon</value>
-				</detail>
-			</annotation>
-			<setupTask xsi:type="setup.p2:P2Task" label="Eclipse Platform (Neon)">
-				<requirement name="org.eclipse.platform.ide"
-					versionRange="[4.6.0,4.7.0)" />
-				<requirement name="org.eclipse.platform.feature.group"
-					versionRange="[4.6.0,4.7.0)" />
-				<requirement name="org.eclipse.rcp.feature.group"
-					versionRange="[4.6.0,4.7.0)" />
-				<repository
-					url="http://download.eclipse.org/technology/epp/packages/neon/M3" />
-				<repository url="http://download.eclipse.org/releases/neon/201511131000" />
-			</setupTask>
-		</version>
-		<version name="mars" label="Mars" requiredJavaVersion="1.7">
-			<annotation source="http://www.eclipse.org/oomph/setup/BrandingInfo">
-				<detail key="siteURI">
-					<value>http://download.eclipse.org/eclipse/downloads/drops4/R-4.5.1-201509040015/
-					</value>
-				</detail>
-				<detail key="folderName">
-					<value>mars</value>
-				</detail>
-				<detail key="folderName.macosx">
-					<value>mars</value>
-				</detail>
-			</annotation>
-			<setupTask xsi:type="setup.p2:P2Task" label="Eclipse Platform (Mars)">
-				<requirement name="org.eclipse.platform.ide"
-					versionRange="[4.5.0,4.6.0)" />
-				<requirement name="org.eclipse.platform.feature.group"
-					versionRange="[4.5.0,4.6.0)" />
-				<requirement name="org.eclipse.rcp.feature.group"
-					versionRange="[4.5.0,4.6.0)" />
-				<repository
-					url="http://download.eclipse.org/technology/epp/packages/mars" />
-				<repository url="http://download.eclipse.org/releases/mars/201510021000" />
-			</setupTask>
-		</version>
-		<version name="luna" label="Luna" requiredJavaVersion="1.6">
-			<annotation source="http://www.eclipse.org/oomph/setup/BrandingInfo">
-				<detail key="siteURI">
-					<value>http://download.eclipse.org/eclipse/downloads/drops4/R-4.4.2-201502041700/
-					</value>
-				</detail>
-			</annotation>
-			<setupTask xsi:type="setup.p2:P2Task" label="Eclipse Platform (Luna)">
-				<requirement name="org.eclipse.platform.ide"
-					versionRange="[4.4.0,4.5.0)" />
-				<requirement name="org.eclipse.platform.feature.group"
-					versionRange="[4.4.0,4.5.0)" />
-				<requirement name="org.eclipse.rcp.feature.group"
-					versionRange="[4.4.0,4.5.0)" />
-				<repository
-					url="http://download.eclipse.org/technology/epp/packages/luna" />
-				<repository url="http://download.eclipse.org/releases/luna/201502271000" />
-			</setupTask>
-		</version>
-		<version name="kepler" label="Kepler" requiredJavaVersion="1.6">
-			<annotation source="http://www.eclipse.org/oomph/setup/BrandingInfo">
-				<detail key="siteURI">
-					<value>http://archive.eclipse.org/eclipse/downloads/drops4/R-4.3.2-201402211700/
-					</value>
-				</detail>
-			</annotation>
-			<setupTask xsi:type="setup.p2:P2Task" label="Eclipse Platform (Kepler)">
-				<requirement name="org.eclipse.platform.ide"
-					versionRange="[4.3.0,4.4.0)" />
-				<requirement name="org.eclipse.platform.feature.group"
-					versionRange="[4.3.0,4.4.0)" />
-				<requirement name="org.eclipse.rcp.feature.group"
-					versionRange="[4.3.0,4.4.0)" />
-				<repository
-					url="http://download.eclipse.org/technology/epp/packages/kepler" />
-				<repository
-					url="http://download.eclipse.org/releases/kepler/201402280900" />
-				<repository
-					url="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/core/S201501230452" />
-			</setupTask>
-		</version>
-		<version name="juno" label="Juno" requiredJavaVersion="1.5">
-			<annotation source="http://www.eclipse.org/oomph/setup/BrandingInfo">
-				<detail key="siteURI">
-					<value>http://archive.eclipse.org/eclipse/downloads/drops4/R-4.2.2-201302041200/
-					</value>
-				</detail>
-			</annotation>
-			<setupTask xsi:type="setup.p2:P2Task" label="Eclipse Platform (Juno)">
-				<requirement name="org.eclipse.platform.ide"
-					versionRange="[4.2.0,4.3.0)" />
-				<requirement name="org.eclipse.platform.feature.group"
-					versionRange="[4.2.0,4.3.0)" />
-				<requirement name="org.eclipse.rcp.feature.group"
-					versionRange="[4.2.0,4.3.0)" />
-				<repository
-					url="http://download.eclipse.org/technology/epp/packages/juno" />
-				<repository url="http://download.eclipse.org/releases/juno/201303010900" />
-				<repository
-					url="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/core/S201501230452" />
-			</setupTask>
-		</version>
-		<description>
-			This package contains the absolute minimal IDE, suitable
-			only as a base for installing other tools.
-		</description>
-	</product>
-	<description></description>
+<setup:ProductCatalog
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    name="org.opfx.products"
+    label="Products">
+  <setupTask
+      xsi:type="setup:InstallationTask"
+      id="installation">
+    <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:WorkspaceTask"
+      id="workspace"/>
+  <setupTask
+      xsi:type="setup:ResourceCreationTask"
+      content="MAX_RECENT_WORKSPACES=5&#xA;RECENT_WORKSPACES=${workspace.location|property}&#xA;RECENT_WORKSPACES_PROTOCOL=3&#xA;SHOW_WORKSPACE_SELECTION_DIALOG=true&#xA;eclipse.preferences.version=1&#xA;"
+      targetURL="configuration:/.settings/org.eclipse.ui.ide.prefs"
+      encoding="UTF-8">
+    <description>
+      Suppress prompt for default workspace already upon very
+      first start
+    </description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.eclipse.oomph.setup.feature.group"/>
+    <requirement
+        name="org.eclipse.egit.feature.group"
+        versionRange="[4.1.1,4.1.2)"/>
+    <repository
+        url="${oomph.update.url}"/>
+    <repository
+        url="http://download.eclipse.org/modeling/emf/emf/updates/2.10/core/R201405190339"/>
+    <repository
+        url="http://download.eclipse.org/egit/updates"/>
+    <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:EclipseIniTask"
+      option="-Doomph.setup"
+      value="=true"
+      vm="true"/>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="Installation Variables">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="tools.location"
+        type="FOLDER"
+        name="tools.location"
+        defaultValue=""
+        label="Tools directory">
+      <description>The directory where tools are being installed to</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="installation.location"
+        type="FOLDER"
+        name="installation.location"
+        value="${tools.location}/eclipse"
+        defaultValue="${tools.location}/eclipse"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="workspace.location"
+        type="FOLDER"
+        name="workspace.location"
+        value="${installation.location/proj/|lower}${scope.project.name/|lower}"
+        label="Project's workspace">
+      <description>The location of the project's workspace</description>
+    </setupTask>
+  </setupTask>
+  <product name="org.eclipse.platform.ide"
+      label="Eclipse Platform">
+    <version
+        name="latest"
+        label="Latest (Neon)"
+        requiredJavaVersion="1.8">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+        <detail
+            key="siteURI">
+          <value>http://download.eclipse.org/eclipse/downloads/drops4/S-4.6M3-201510291100/</value>
+        </detail>
+        <detail
+            key="folderName">
+          <value>neon</value>
+        </detail>
+        <detail
+            key="folderName.macosx">
+          <value>neon</value>
+        </detail>
+      </annotation>
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="Eclipse Platform (Neon)">
+        <requirement
+            name="org.eclipse.platform.ide"
+            versionRange="[4.6.0,5.0.0)"/>
+        <requirement
+            name="org.eclipse.platform.feature.group"
+            versionRange="[4.6.0,5.0.0)"/>
+        <requirement
+            name="org.eclipse.rcp.feature.group"
+            versionRange="[4.6.0,5.0.0)"/>
+        <repository
+            url="http://download.eclipse.org/technology/epp/packages/neon/M3"/>
+        <repository
+            url="http://download.eclipse.org/releases/neon/201511131000"/>
+      </setupTask>
+    </version>
+    <version
+        name="latest.released"
+        label="Latest Release (Mars)"
+        requiredJavaVersion="1.7">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+        <detail
+            key="siteURI">
+          <value>http://download.eclipse.org/eclipse/downloads/drops4/R-4.5.1-201509040015/</value>
+        </detail>
+        <detail
+            key="folderName">
+          <value>mars</value>
+        </detail>
+        <detail
+            key="folderName.macosx">
+          <value>mars</value>
+        </detail>
+      </annotation>
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="Eclipse Platform (Mars)">
+        <requirement
+            name="org.eclipse.platform.ide"
+            versionRange="[4.5.0,4.6.0)"/>
+        <requirement
+            name="org.eclipse.platform.feature.group"
+            versionRange="[4.5.0,4.6.0)"/>
+        <requirement
+            name="org.eclipse.rcp.feature.group"
+            versionRange="[4.5.0,4.6.0)"/>
+        <repository
+            url="http://download.eclipse.org/technology/epp/packages/mars"/>
+        <repository
+            url="http://download.eclipse.org/releases/mars/201510021000"/>
+      </setupTask>
+    </version>
+    <version
+        name="neon"
+        label="Neon"
+        requiredJavaVersion="1.8">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+        <detail
+            key="siteURI">
+          <value>http://download.eclipse.org/eclipse/downloads/drops4/S-4.6M3-201510291100/</value>
+        </detail>
+        <detail
+            key="folderName">
+          <value>neon</value>
+        </detail>
+        <detail
+            key="folderName.macosx">
+          <value>neon</value>
+        </detail>
+      </annotation>
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="Eclipse Platform (Neon)">
+        <requirement
+            name="org.eclipse.platform.ide"
+            versionRange="[4.6.0,4.7.0)"/>
+        <requirement
+            name="org.eclipse.platform.feature.group"
+            versionRange="[4.6.0,4.7.0)"/>
+        <requirement
+            name="org.eclipse.rcp.feature.group"
+            versionRange="[4.6.0,4.7.0)"/>
+        <repository
+            url="http://download.eclipse.org/technology/epp/packages/neon/M3"/>
+        <repository
+            url="http://download.eclipse.org/releases/neon/201511131000"/>
+      </setupTask>
+    </version>
+    <version
+        name="mars"
+        label="Mars"
+        requiredJavaVersion="1.7">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+        <detail
+            key="siteURI">
+          <value>http://download.eclipse.org/eclipse/downloads/drops4/R-4.5.1-201509040015/</value>
+        </detail>
+        <detail
+            key="folderName">
+          <value>mars</value>
+        </detail>
+        <detail
+            key="folderName.macosx">
+          <value>mars</value>
+        </detail>
+      </annotation>
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="Eclipse Platform (Mars)">
+        <requirement
+            name="org.eclipse.platform.ide"
+            versionRange="[4.5.0,4.6.0)"/>
+        <requirement
+            name="org.eclipse.platform.feature.group"
+            versionRange="[4.5.0,4.6.0)"/>
+        <requirement
+            name="org.eclipse.rcp.feature.group"
+            versionRange="[4.5.0,4.6.0)"/>
+        <repository
+            url="http://download.eclipse.org/technology/epp/packages/mars"/>
+        <repository
+            url="http://download.eclipse.org/releases/mars/201510021000"/>
+      </setupTask>
+    </version>
+    <version
+        name="luna"
+        label="Luna"
+        requiredJavaVersion="1.6">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+        <detail
+            key="siteURI">
+          <value>http://download.eclipse.org/eclipse/downloads/drops4/R-4.4.2-201502041700/</value>
+        </detail>
+      </annotation>
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="Eclipse Platform (Luna)">
+        <requirement
+            name="org.eclipse.platform.ide"
+            versionRange="[4.4.0,4.5.0)"/>
+        <requirement
+            name="org.eclipse.platform.feature.group"
+            versionRange="[4.4.0,4.5.0)"/>
+        <requirement
+            name="org.eclipse.rcp.feature.group"
+            versionRange="[4.4.0,4.5.0)"/>
+        <repository
+            url="http://download.eclipse.org/technology/epp/packages/luna"/>
+        <repository
+            url="http://download.eclipse.org/releases/luna/201502271000"/>
+      </setupTask>
+    </version>
+    <version
+        name="kepler"
+        label="Kepler"
+        requiredJavaVersion="1.6">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+        <detail
+            key="siteURI">
+          <value>http://archive.eclipse.org/eclipse/downloads/drops4/R-4.3.2-201402211700/</value>
+        </detail>
+      </annotation>
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="Eclipse Platform (Kepler)">
+        <requirement
+            name="org.eclipse.platform.ide"
+            versionRange="[4.3.0,4.4.0)"/>
+        <requirement
+            name="org.eclipse.platform.feature.group"
+            versionRange="[4.3.0,4.4.0)"/>
+        <requirement
+            name="org.eclipse.rcp.feature.group"
+            versionRange="[4.3.0,4.4.0)"/>
+        <repository
+            url="http://download.eclipse.org/technology/epp/packages/kepler"/>
+        <repository
+            url="http://download.eclipse.org/releases/kepler/201402280900"/>
+        <repository
+            url="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/core/S201501230452"/>
+      </setupTask>
+    </version>
+    <version
+        name="juno"
+        label="Juno"
+        requiredJavaVersion="1.5">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/BrandingInfo">
+        <detail
+            key="siteURI">
+          <value>http://archive.eclipse.org/eclipse/downloads/drops4/R-4.2.2-201302041200/</value>
+        </detail>
+      </annotation>
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="Eclipse Platform (Juno)">
+        <requirement
+            name="org.eclipse.platform.ide"
+            versionRange="[4.2.0,4.3.0)"/>
+        <requirement
+            name="org.eclipse.platform.feature.group"
+            versionRange="[4.2.0,4.3.0)"/>
+        <requirement
+            name="org.eclipse.rcp.feature.group"
+            versionRange="[4.2.0,4.3.0)"/>
+        <repository
+            url="http://download.eclipse.org/technology/epp/packages/juno"/>
+        <repository
+            url="http://download.eclipse.org/releases/juno/201303010900"/>
+        <repository
+            url="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/core/S201501230452"/>
+      </setupTask>
+    </version>
+    <description>
+      This package contains the absolute minimal IDE, suitable
+      only as a base for installing other tools.
+    </description>
+  </product>
+  <description></description>
 </setup:ProductCatalog>
