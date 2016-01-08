@@ -38,19 +38,6 @@
     </description>
   </setupTask>
   <setupTask
-      xsi:type="setup.p2:P2Task"
-      label="Mylyn">
-    <requirement
-        name="org.eclipse.mylyn.github.feature.feature.group"
-        filter=""/>
-    <requirement
-        name="org.eclipse.mylyn.builds.feature.group"/>
-    <requirement
-        name="org.eclipse.mylyn.ide_feature.feature.group"/>
-    <repository
-        url="http://download.eclipse.org/egit/github/updates/"/>
-  </setupTask>
-  <setupTask
       xsi:type="jdt:JRETask"
       version="JavaSE-1.7"
       location="${jre.location-1.7}">
