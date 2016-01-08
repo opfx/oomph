@@ -180,6 +180,16 @@
         name="General">
       <setupTask
           xsi:type="setup:CompoundTask"
+          name="Capabilities">
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.ui.workbench/UIActivities.org.eclipse.antDevelopment"
+            value="true">
+          <description>Automatic Ant Enablement</description>
+        </setupTask>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:CompoundTask"
           name="Editors">
         <setupTask
             xsi:type="setup:CompoundTask"
@@ -200,13 +210,15 @@
       </setupTask>
       <setupTask
           xsi:type="setup:CompoundTask"
-          name="Capabilities">
+          name="Perspectives">
         <setupTask
             xsi:type="setup:PreferenceTask"
-            key="/instance/org.eclipse.ui.workbench/UIActivities.org.eclipse.antDevelopment"
-            value="true">
-          <description>Automatic Ant Enablement</description>
+            id=""
+            key="/instance/org.eclipse.ui/defaultPerspectiveId"
+            value="org.eclipse.jdt.ui.JavaPerspective">
+          <description>Make the Java perspective the default perspective</description>
         </setupTask>
+        <description>Container for the &quot;Window->Preferences->General->Perspectives&quot; preferences</description>
       </setupTask>
     </setupTask>
     <setupTask
@@ -490,6 +502,10 @@
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.egit.core/core_autoIgnoreDerivedResources"
             value="false"/>
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.egit.core/core_defaultRepositoryDir"
+            value="${git.container.root}"/>
       </setupTask>
     </setupTask>
     <description></description>
@@ -503,6 +519,14 @@
       Suppress prompt for default workspace already upon very
       first start
     </description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:EclipseIniTask"
+      excludedTriggers="STARTUP"
+      option="-Dperspective"
+      value="=org.eclipse.jdt.ui.JavaPerspective"
+      vm="true">
+    <description></description>
   </setupTask>
   <project label="Generic Plugin">
     <stream
@@ -528,6 +552,7 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="git.clone.ant.js"
+          location="${git.container.root/}/${scope.project.name}"
           remoteURI="https://${github.user.id|username}@github.com/opfx/${scope.project.name}.git">
         <description>Javascript Ant Plugin</description>
       </setupTask>
@@ -594,6 +619,7 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="git.clone.org.opfx.ant.php"
+          location="${git.container.root/}/${scope.project.name}"
           remoteURI="https://${github.user.id|username}@github.com/opfx/${scope.project.name}.git">
         <description>PHP Ant Plugin</description>
       </setupTask>
