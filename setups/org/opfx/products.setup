@@ -79,7 +79,7 @@
         id="installation.location"
         type="FOLDER"
         name="installation.location"
-        value="${product.container.root/eclipse/|lower}"
+        value="${product.container.root/|lower}"
         defaultValue="">
       <description></description>
     </setupTask>
