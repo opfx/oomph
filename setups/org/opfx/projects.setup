@@ -188,5 +188,6 @@
   </setupTask>
   <project href="projects/GeneralProjects.setup#/"/>
   <project href="projects/AntPlugins.setup#/"/>
+  <project href="projects/jenkins.setup#/"/>
   <description>The opfx's Eclipse based projects catalog</description>
 </setup:ProjectCatalog>
