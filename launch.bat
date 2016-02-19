@@ -3,7 +3,7 @@
 
 SET cwd=%~dp0
 SET exec=%1
-SET setups=file:///%cwd:\=/%/setups/
+SET setups=file:///%cwd:\=/%setups/
 SET workspace=%userprofile%\workspace
 
 if not x%exec:eclipse-inst=%==x%exec%  GOTO :CASE_INSTALL
