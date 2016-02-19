@@ -5,7 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    name="org.eclipse"
+    name="org.opfx"
     label="Opfx Projects">
   <annotation
       source="http://www.eclipse.org/oomph/setup/BrandingInfo">
@@ -185,9 +185,10 @@
         name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
     <repository
         url="http://download.eclipse.org/egit/github/updates/"/>
-  </setupTask>
-  <project href="projects/GeneralProjects.setup#/"/>
-  <project href="projects/AntPlugins.setup#/"/>
+  </setupTask>  
+  <project href="projects/php.setup#/"/>
+  <project href="projects/ant.setup#/"/>
   <project href="projects/jenkins.setup#/"/>
+  <project href="projects/arduino.setup#/"/>
   <description>The opfx's Eclipse based projects catalog</description>
 </setup:ProjectCatalog>

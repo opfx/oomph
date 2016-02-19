@@ -4,9 +4,11 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
+    xmlns:launching_1.0="http://www.eclipse.org/oomph/setup/launching/1.0"
+    xmlns:projectset="http://www.eclipse.org/oomph/setup/projectset/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/projectset/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/ProjectSet.ecore"
     name="jenkins"
     label="Jenkins">
   <setupTask
@@ -19,9 +21,12 @@
     </description>
   </setupTask>
   <setupTask
-      xsi:type="setup.p2:P2Task">
+      xsi:type="setup.p2:P2Task"
+      label="m2e">
     <requirement
-        name="org.eclipse.m2e.feature.feature.group"/>
+        name="org.eclipse.m2e.feature.feature.group"
+        versionRange="[1.6.2,1.6.3)"/>
+    <description></description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
@@ -360,14 +365,22 @@
       vm="true">
     <description></description>
   </setupTask>
-  <project name="project"
-      label="Project">
+  <project name="default"
+      label="New Plugin">
+    <setupTask
+        xsi:type="projectset:ProjectSetImportTask"
+        id=""
+        uRL="https://subversion.assembla.com/svn/MYPROJECT/user.psf"/>
     <stream
         name="master"/>
     <logicalProjectContainer
         xsi:type="setup:ProjectCatalog"
-        href="index:/org.eclipse.setup#//@projectCatalogs[name='org.eclipse']"/>
+        href="index:/org.eclipse.setup#//@projectCatalogs[name='org.opfx']/@project['jenkins']"/>
     <description>An empty project</description>
+    <setupTask
+        xsi:type="launching_1.0:LaunchTask"
+        id="GenerateXturtle"
+        launcher="Generate Language Infrastructure (de.itemis.tooling.xturtle)"/>
   </project>
   <project name="phpinstaller"
       label="PHP Installer"
@@ -379,6 +392,6 @@
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
-      href="index:/org.eclipse.setup#//@projectCatalogs[name='org.eclipse']"/>
+      href="index:/org/opfx/projects.setup#/"/>
   <description></description>
 </setup:Project>
