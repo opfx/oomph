@@ -32,7 +32,7 @@
         name="org.eclipse.oomph.setup.feature.group"/>
     <requirement
         name="org.eclipse.egit.feature.group"
-        versionRange="[4.0.0,4.1.2)"/>
+        versionRange="[4.0.0,5.0.0)"/>
     <repository
         url="${oomph.update.url}"/>
     <repository

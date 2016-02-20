@@ -40,4 +40,8 @@
       href="org/opfx/products.setup#/"/>
   <projectCatalog
       href="org/opfx/projects.setup#/"/>
+  <projectCatalog
+      href="https://raw.githubusercontent.com/ganzstudios/oomph/master/setups/com/ganz/projects.setup#/"/>
+  <projectCatalog
+      href="https://raw.githubusercontent.com/ganzstudios/oomph/master/setups/com/webkinz/projects.setup#/"/>
 </setup:Index>
