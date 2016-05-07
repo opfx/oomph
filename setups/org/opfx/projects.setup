@@ -162,7 +162,7 @@
         <setupTask
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.egit.core/core_defaultRepositoryDir"
-            value="${gitrepo.container.root}">
+            value="${git.repository.location}">
           <description></description>
         </setupTask>
       </setupTask>
@@ -185,10 +185,9 @@
         name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
     <repository
         url="http://download.eclipse.org/egit/github/updates/"/>
-  </setupTask>  
-  <project href="projects/php.setup#/"/>
+  </setupTask>
+  <project href="projects/ai.setup#/"/>
+  <project href="projects/oomph.setup#/"/>
   <project href="projects/ant.setup#/"/>
-  <project href="projects/jenkins.setup#/"/>
-  <project href="projects/arduino.setup#/"/>
   <description>The opfx's Eclipse based projects catalog</description>
 </setup:ProjectCatalog>
