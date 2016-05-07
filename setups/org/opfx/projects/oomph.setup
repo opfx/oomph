@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Project
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
+    xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore"
+    name="oomph"
+    label="Oomph">
+  <setupTask
+      xsi:type="setup:WorkspaceTask"
+      id="workspace"
+      excludedTriggers="MANUAL">
+    <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="">
+    <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="Variables">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="workspace.location"
+        type="FOLDER"
+        name="workspace.location"
+        value="${install.root/}${organization/proj/|lower}${scope.project.name/|lower}"
+        defaultValue=""
+        storageURI="scope://Workspace"
+        label="${scope.project.label}'s workspace">
+      <description>The location of the project's workspace</description>
+    </setupTask>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="Tasks">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.oomph"
+        location="${git.repository.location}/${scope.project.name}"
+        remoteURI="https://github.com/opfx/oomph"
+        checkoutBranch="master">
+      <description>Clones the ${organization} oomph setups</description>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.oomph.location}"
+          locateNestedProjects="true"/>
+    </setupTask>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      id="git.repository.location"
+      type="FOLDER"
+      name="git.repository.location"
+      value="${repository.location/.git/}${organization/|lower}">
+    <description>The local git clone directory</description>
+  </setupTask>
+  <stream name="master"
+      label="master"/>
+  <logicalProjectContainer
+      xsi:type="setup:ProjectCatalog"
+      href="index:/org.eclipse.setup#//@projectCatalogs[name='org.opfx']"/>
+  <description>The setups for Opfx Projects</description>
+</setup:Project>
