@@ -186,6 +186,19 @@
     <repository
         url="http://download.eclipse.org/egit/github/updates/"/>
   </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      id=""
+      label="Subversive">
+    <requirement
+        name="org.eclipse.team.svn.resource.ignore.rules.jdt.feature.group"/>
+    <requirement
+        name="org.eclipse.team.svn.revision.graph.feature.group"/>
+    <requirement
+        name="org.eclipse.team.svn.mylyn.feature.group"/>
+    <requirement
+        name="org.eclipse.team.svn.feature.group"/>
+  </setupTask>
   <project href="projects/ai.setup#/"/>
   <project href="projects/oomph.setup#/"/>
   <project href="projects/ant.setup#/"/>
