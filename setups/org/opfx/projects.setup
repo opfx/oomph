@@ -198,6 +198,10 @@
         name="org.eclipse.team.svn.mylyn.feature.group"/>
     <requirement
         name="org.eclipse.team.svn.feature.group"/>
+    <requirement
+        name="org.polarion.eclipse.team.svn.connector.feature.group"/>
+    <requirement
+        name="org.polarion.eclipse.team.svn.connector.svnkit18.feature.group"/>
   </setupTask>
   <project href="projects/ai.setup#/"/>
   <project href="projects/oomph.setup#/"/>
