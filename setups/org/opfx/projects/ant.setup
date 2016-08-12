@@ -61,6 +61,14 @@
         name="scope.project.group"
         value="ant"
         storageURI="scope://Workspace"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="scope.project.name.new-plugin"
+        name="scope.project.name.new-plugin"
+        storageURI="scope://Workspace"
+        label="Project name">
+      <description>Variable </description>
+    </setupTask>
     <setup:VariableTask
         name="github.user.id"
         defaultValue="anonymous"
@@ -414,7 +422,7 @@
     <description></description>
   </setupTask>
   <project name="new-plugin"
-      label="New Ant Plugin">
+      label="New Plugin">
     <stream
         name="master"
         label="master"/>
@@ -426,16 +434,16 @@
         name="Tasks">
       <setupTask
           xsi:type="git:GitCloneTask"
-          id="git.ant-php"
+          id="git.clone.ant.ant-php"
           location="${git.repository.location}/${scope.project.name}"
           remoteURI="https://github.com/opfx/ant-php"
           pushURI="">
-        <description>Clones the ${organization} ${scope.project.name} repository</description>
+        <description>Clones the ant php plugin repository</description>
       </setupTask>
       <setupTask
           xsi:type="projects:ProjectsImportTask">
         <sourceLocator
-            rootFolder="${git.ant-php.location}"
+            rootFolder="${git.clone.ant.ant-php.location}"
             locateNestedProjects="true"/>
       </setupTask>
     </setupTask>
