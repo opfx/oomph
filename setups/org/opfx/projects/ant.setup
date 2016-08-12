@@ -57,7 +57,7 @@
       name="Variables">
     <setupTask
         xsi:type="setup:VariableTask"
-        id=""
+        id="scope.project.group"
         name="scope.project.group"
         value="ant"
         storageURI="scope://Workspace"/>
@@ -65,8 +65,8 @@
         name="github.user.id"
         defaultValue="anonymous"
         label="Github user ID"
-        xmlns:xmi="http://www.omg.org/XMI"
-        xmlns:setup="http://www.eclipse.org/oomph/setup/1.0">
+        xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+        xmlns:xmi="http://www.omg.org/XMI">
 			<description>The user ID of the Github account</description>
 		</setup:VariableTask>
   </setupTask>

@@ -18,7 +18,9 @@
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
-      label="">
+      label="Oomph SDK">
+    <requirement
+        name="org.eclipse.oomph.setup.sdk.feature.group"/>
     <description></description>
   </setupTask>
   <setupTask
@@ -26,14 +28,26 @@
       name="Variables">
     <setupTask
         xsi:type="setup:VariableTask"
-        id="workspace.location"
+        id="scope.project.group"
+        name="scope.project.group"
+        value="oomph"
+        storageURI="scope://Workspace"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="installation.location"
         type="FOLDER"
-        name="workspace.location"
-        value="${install.root/}${organization/proj/|lower}${scope.project.name/|lower}"
-        defaultValue=""
-        storageURI="scope://Workspace"
-        label="${scope.project.label}'s workspace">
-      <description>The location of the project's workspace</description>
+        name="installation.location"
+        value="${install.root/|lower}tool/eclipse/oomph"
+        label="">
+      <description>Custom installation for oomph editor (required because we don't to modify the editor while testing changes)</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="git.repository.location"
+        type="FOLDER"
+        name="git.repository.location"
+        value="${repository.location/.git/|lower}${scope.project.name/|lower}">
+      <description></description>
     </setupTask>
   </setupTask>
   <setupTask
@@ -53,14 +67,6 @@
           rootFolder="${git.oomph.location}"
           locateNestedProjects="true"/>
     </setupTask>
-  </setupTask>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      id="git.repository.location"
-      type="FOLDER"
-      name="git.repository.location"
-      value="${repository.location/.git/}${organization/|lower}">
-    <description>The local git clone directory</description>
   </setupTask>
   <stream name="master"
       label="master"/>

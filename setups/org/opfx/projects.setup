@@ -203,7 +203,19 @@
     <requirement
         name="org.polarion.eclipse.team.svn.connector.svnkit18.feature.group"/>
   </setupTask>
-  <project href="projects/ai.setup#/"/>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="EGit">
+    <requirement
+        name="org.eclipse.egit.feature.group"/>
+    <requirement
+        name="org.eclipse.egit.mylyn.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.git.feature.group"/>
+    <repository
+        url="http://download.eclipse.org/egit/updates"/>
+    <description></description>
+  </setupTask>
   <project href="projects/oomph.setup#/"/>
   <project href="projects/ant.setup#/"/>
   <description>The opfx's Eclipse based projects catalog</description>
