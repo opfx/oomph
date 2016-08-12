@@ -61,14 +61,6 @@
         name="scope.project.group"
         value="ant"
         storageURI="scope://Workspace"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        id="scope.project.name.new-plugin"
-        name="scope.project.name.new-plugin"
-        storageURI="scope://Workspace"
-        label="Project name">
-      <description>Variable </description>
-    </setupTask>
     <setup:VariableTask
         name="github.user.id"
         defaultValue="anonymous"
@@ -423,6 +415,14 @@
   </setupTask>
   <project name="new-plugin"
       label="New Plugin">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="scope.project.name.new-plugin"
+        name="scope.project.name.new-plugin"
+        storageURI="scope://Workspace"
+        label="Project name">
+      <description>Variable </description>
+    </setupTask>
     <stream
         name="master"
         label="master"/>
