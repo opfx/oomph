@@ -27,16 +27,63 @@
       licenseConfirmationDisabled="true">
     <requirement
         name="org.eclipse.oomph.setup.feature.group"/>
-    <requirement
-        name="org.eclipse.egit.feature.group"
-        versionRange="[4.0.0,5.0.0)"/>
     <repository
         url="${oomph.update.url}"/>
     <repository
         url="http://download.eclipse.org/modeling/emf/emf/updates/2.10/core/R201405190339"/>
     <repository
+        url="http://download.eclipse.org/releases/mars"/>
+    <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="EGit">
+    <requirement
+        name="org.eclipse.egit.feature.group"
+        versionRange="[4.0.0,5.0.0)"/>
+    <requirement
+        name="org.eclipse.egit.mylyn.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.git.feature.group"/>
+    <repository
         url="http://download.eclipse.org/egit/updates"/>
     <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="Mylyn">
+    <requirement
+        name="org.eclipse.mylyn.github.feature.feature.group"
+        filter=""/>
+    <requirement
+        name="org.eclipse.mylyn.builds.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.hudson.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.ide_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.git.feature.group"/>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      id=""
+      label="Subversive">
+    <requirement
+        name="org.eclipse.team.svn.resource.ignore.rules.jdt.feature.group"/>
+    <requirement
+        name="org.eclipse.team.svn.revision.graph.feature.group"/>
+    <requirement
+        name="org.eclipse.team.svn.mylyn.feature.group"/>
+    <requirement
+        name="org.eclipse.team.svn.feature.group"/>
+    <requirement
+        name="org.polarion.eclipse.team.svn.connector.feature.group"/>
+    <requirement
+        name="org.polarion.eclipse.team.svn.connector.svnkit18.feature.group"/>
+    <repository
+        url="http://community.polarion.com/projects/subversive/download/eclipse/5.0/mars-site/"/>
   </setupTask>
   <setupTask
       xsi:type="setup:EclipseIniTask"
@@ -87,8 +134,8 @@
         id="workspace.location"
         type="FOLDER"
         name="workspace.location"
-        value="${install.root/}${organization/proj/|lower}${scope.project.group/|lower}${scope.project.name/|lower}"
-        defaultValue=""
+        value="${install.root/|lower}proj/${scope.project.group/|lower}${scope.project.stream.name/|lower}"
+        defaultValue="${install.root/|lower}proj/${scope.project.group/|lower}${scope.project.stream.name/|lower}"
         storageURI="scope://Workspace"
         label="${scope.project.label}'s workspace">
       <description>The location of the project's workspace</description>
