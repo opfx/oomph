@@ -104,6 +104,7 @@
         type="FOLDER"
         name="install.root"
         defaultValue="${user.home}"
+        storageURI="scope://Installation"
         label="Installation folder">
       <description>The root of the installation directory</description>
     </setupTask>
@@ -112,22 +113,28 @@
         id="installation.location"
         type="FOLDER"
         name="installation.location"
-        value="${install.root/|lower}tool/eclipse"
+        value="${install.root/tool/eclipse/|lower}"
         label="">
       <description></description>
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
         id="repository.location"
+        type="FOLDER"
         name="repository.location"
-        value="${install.root/|lower}repo/"/>
+        value="${install.root/repo/|lower}"
+        storageURI="scope://Installation"
+        label="">
+      <description></description>
+    </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
         type="FOLDER"
         name="git.container.root"
         value="${repository.location/.git/|lower}"
         defaultValue="${repository.location/.git/|lower}"
-        storageURI="scope://Installation">
+        storageURI="scope://Installation"
+        label="Git clone folder">
       <description></description>
     </setupTask>
     <setupTask
