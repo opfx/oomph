@@ -12,16 +12,33 @@
     name="ant"
     label="Ant">
   <setupTask
+      xsi:type="jdt:JRETask"
+      version="JavaSE-1.7"
+      location="${jre.location-1.7}">
+    <description>
+      Define the JRE needed to compile and run the Java
+      projects of ${scope.project.label}
+    </description>
+  </setupTask>
+  <setupTask
       xsi:type="setup:WorkspaceTask"
       id="workspace"
       excludedTriggers="MANUAL">
     <description></description>
   </setupTask>
   <setupTask
-      xsi:type="setup.p2:P2Task">
+      xsi:type="setup.p2:P2Task"
+      label="JDT">
     <requirement
-        name="org.eclipse.jdt.feature.group"
-        versionRange="[3.11.0,3.12.0)"/>
+        name="org.eclipse.jdt.feature.group"/>
+    <description>
+      Install the tools needed in the IDE to work with the
+      source code for ${scope.project.label}
+    </description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="Ivy">
     <requirement
         name="org.apache.ivy.feature.feature.group"
         versionRange="2.4.0"/>
@@ -43,15 +60,6 @@
     </description>
   </setupTask>
   <setupTask
-      xsi:type="jdt:JRETask"
-      version="JavaSE-1.7"
-      location="${jre.location-1.7}">
-    <description>
-      Define the JRE needed to compile and run the Java
-      projects of ${scope.project.label}
-    </description>
-  </setupTask>
-  <setupTask
       xsi:type="setup:CompoundTask"
       id="org.eclipse.ant.variables"
       name="Variables">
@@ -64,7 +72,7 @@
     <setupTask
         xsi:type="setup:VariableTask"
         id="scope.project.name.new-plugin"
-        name="scope.project.name.new-plugin"
+        name="scope.project.name.new"
         storageURI="scope://Workspace"
         label="Project name">
       <description>Variable </description>
@@ -73,8 +81,8 @@
         name="github.user.id"
         defaultValue="anonymous"
         label="Github user ID"
-        xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
-        xmlns:xmi="http://www.omg.org/XMI">
+        xmlns:xmi="http://www.omg.org/XMI"
+        xmlns:setup="http://www.eclipse.org/oomph/setup/1.0">
 			<description>The user ID of the Github account</description>
 		</setup:VariableTask>
   </setupTask>
@@ -404,16 +412,6 @@
     <description></description>
   </setupTask>
   <setupTask
-      xsi:type="setup:ResourceCreationTask"
-      content="MAX_RECENT_WORKSPACES=5&#xA;RECENT_WORKSPACES=${workspace.location|property}&#xA;RECENT_WORKSPACES_PROTOCOL=3&#xA;SHOW_WORKSPACE_SELECTION_DIALOG=true&#xA;eclipse.preferences.version=1&#xA;"
-      targetURL="configuration:/.settings/org.eclipse.ui.ide.prefs"
-      encoding="UTF-8">
-    <description>
-      Suppress prompt for default workspace already upon very
-      first start
-    </description>
-  </setupTask>
-  <setupTask
       xsi:type="setup:EclipseIniTask"
       excludedTriggers="STARTUP"
       option="-Dperspective"
@@ -426,6 +424,9 @@
     <stream
         name="master"
         label="master"/>
+    <logicalProjectContainer
+        xsi:type="setup:Project"
+        href="index:/org.eclipse.setup#//@projectCatalogs[name='org.opfx']/@projects[name='ant']"/>
   </project>
   <project name="ant-php"
       label="PHP Ant Plugin">
@@ -436,7 +437,7 @@
           xsi:type="git:GitCloneTask"
           id="git.clone.ant.ant-php"
           location="${git.repository.location}/${scope.project.name}"
-          remoteURI="https://github.com/opfx/ant-php"
+          remoteURI="https://github.com/opfx/${scope.project.name}"
           pushURI="">
         <description>Clones the ant php plugin repository</description>
       </setupTask>

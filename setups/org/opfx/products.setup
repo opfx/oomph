@@ -14,7 +14,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup:ResourceCreationTask"
-      content="MAX_RECENT_WORKSPACES=5&#xA;RECENT_WORKSPACES=${workspace.location|property}&#xA;RECENT_WORKSPACES_PROTOCOL=3&#xA;SHOW_WORKSPACE_SELECTION_DIALOG=true&#xA;eclipse.preferences.version=1&#xA;"
+      content="MAX_RECENT_WORKSPACES=5&#xA;RECENT_WORKSPACES=${workspace.location|canonical}&#xA;RECENT_WORKSPACES_PROTOCOL=3&#xA;SHOW_WORKSPACE_SELECTION_DIALOG=true&#xA;eclipse.preferences.version=1&#xA;"
       targetURL="configuration:/.settings/org.eclipse.ui.ide.prefs"
       encoding="UTF-8">
     <description>
@@ -24,6 +24,8 @@
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
+      id=""
+      label="Oomph"
       licenseConfirmationDisabled="true">
     <requirement
         name="org.eclipse.oomph.setup.feature.group"/>
@@ -39,8 +41,7 @@
       xsi:type="setup.p2:P2Task"
       label="EGit">
     <requirement
-        name="org.eclipse.egit.feature.group"
-        versionRange="[4.0.0,5.0.0)"/>
+        name="org.eclipse.egit.feature.group"/>
     <requirement
         name="org.eclipse.egit.mylyn.feature.group"/>
     <requirement
@@ -68,7 +69,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
-      id=""
+      id="p2.subversive"
       label="Subversive">
     <requirement
         name="org.eclipse.team.svn.resource.ignore.rules.jdt.feature.group"/>
@@ -122,11 +123,20 @@
         value="${install.root/|lower}repo/"/>
     <setupTask
         xsi:type="setup:VariableTask"
+        type="FOLDER"
+        name="git.container.root"
+        value="${repository.location/.git/|lower}"
+        defaultValue="${repository.location/.git/|lower}"
+        storageURI="scope://Installation">
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
         id="git.repository.location"
         type="FOLDER"
         name="git.repository.location"
-        value="${install.root/|lower}proj/${scope.project.group/|lower}${scope.project.stream.name/|lower}"
-        defaultValue="${install.root/|lower}proj/${scope.project.group/|lower}${scope.project.stream.name/|lower}">
+        value="${git.container.root}${scope.project.group/|lower}"
+        defaultValue="${git.container.root}${scope.project.group/|lower}">
       <description></description>
     </setupTask>
     <setupTask
