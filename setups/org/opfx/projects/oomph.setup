@@ -46,7 +46,7 @@
         id="git.repository.location"
         type="FOLDER"
         name="git.repository.location"
-        value="${repository.location/.git/|lower}${scope.project.name/|lower}">
+        value="${git.container.root}${scope.project.name/|lower}">
       <description></description>
     </setupTask>
   </setupTask>
