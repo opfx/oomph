@@ -4,11 +4,9 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
-    xmlns:launching_1.0="http://www.eclipse.org/oomph/setup/launching/1.0"
-    xmlns:projectset="http://www.eclipse.org/oomph/setup/projectset/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/projectset/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/ProjectSet.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore"
     name="jenkins"
     label="Jenkins">
   <setupTask
@@ -24,14 +22,28 @@
       xsi:type="setup.p2:P2Task"
       label="m2e">
     <requirement
-        name="org.eclipse.m2e.feature.feature.group"
-        versionRange="[1.6.2,1.6.3)"/>
+        name="org.eclipse.m2e.feature.feature.group"/>
     <description></description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
       id="org.eclipse.ant.variables"
-      name="Variables"/>
+      name="Variables">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="scope.project.group"
+        name="scope.project.group"
+        value="jenkins"
+        storageURI="scope://Workspace"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="scope.project.name.new"
+        name="scope.project.name.new"
+        storageURI="scope://Workspace"
+        label="Project name">
+      <description></description>
+    </setupTask>
+  </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
       name="Preferences">
@@ -348,16 +360,6 @@
     <description></description>
   </setupTask>
   <setupTask
-      xsi:type="setup:ResourceCreationTask"
-      content="MAX_RECENT_WORKSPACES=5&#xA;RECENT_WORKSPACES=${workspace.location|property}&#xA;RECENT_WORKSPACES_PROTOCOL=3&#xA;SHOW_WORKSPACE_SELECTION_DIALOG=true&#xA;eclipse.preferences.version=1&#xA;"
-      targetURL="configuration:/.settings/org.eclipse.ui.ide.prefs"
-      encoding="UTF-8">
-    <description>
-      Suppress prompt for default workspace already upon very
-      first start
-    </description>
-  </setupTask>
-  <setupTask
       xsi:type="setup:EclipseIniTask"
       excludedTriggers="STARTUP"
       option="-Dperspective"
@@ -366,21 +368,11 @@
     <description></description>
   </setupTask>
   <project name="default"
-      label="New Plugin">
-    <setupTask
-        xsi:type="projectset:ProjectSetImportTask"
-        id=""
-        uRL="https://subversion.assembla.com/svn/MYPROJECT/user.psf"/>
+      label="New Plugin"
+      logicalProjectContainer="/">
     <stream
         name="master"/>
-    <logicalProjectContainer
-        xsi:type="setup:ProjectCatalog"
-        href="index:/org.eclipse.setup#//@projectCatalogs[name='org.opfx']/@project['jenkins']"/>
     <description>An empty project</description>
-    <setupTask
-        xsi:type="launching_1.0:LaunchTask"
-        id="GenerateXturtle"
-        launcher="Generate Language Infrastructure (de.itemis.tooling.xturtle)"/>
   </project>
   <project name="phpinstaller"
       label="PHP Installer"
@@ -392,6 +384,6 @@
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
-      href="index:/org/opfx/projects.setup#/"/>
+      href="index:/org.eclipse.setup#//@projectCatalogs[name='org.opfx']"/>
   <description></description>
 </setup:Project>
