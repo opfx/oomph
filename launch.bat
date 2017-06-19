@@ -2,6 +2,7 @@
 @echo off
 
 SET cwd=%~dp0
+SET userprofile=%HOMEDRIVE%\work\test\opfx\user
 SET exec=%1
 SET setups=file:///%cwd:\=/%setups/
 SET workspace=%userprofile%\workspace
@@ -22,7 +23,7 @@ GOTO :CASE_DEFAULT
 :CASE_INSTALL
 	ECHO Launching installer...
 	echo on
-	start eclipse-inst.exe -vmargs "-Doomph.redirection.setups=http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/->%setups%"
+	start ..\..\setup\eclipse-inst.exe -vmargs -Duser.home="%userprofile%" -Doomph.redirection.setups="http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/->%setups%"
 	@echo off
 	GOTO CASE_RETURN
 	
