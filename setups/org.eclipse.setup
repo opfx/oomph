@@ -39,5 +39,13 @@
   <productCatalog
       href="products.setup#/"/>
   <projectCatalog
-      href="projects.setup#/"/>
+      href="org/opfx/projects.setup#/"/>
+      <!--
+  <projectCatalog
+      href="https://raw.githubusercontent.com/ganzstudios/oomph/master/setups/com/ganz/projects.setup#/"/>
+      -->  
+      <!--
+      <projectCatalog
+      href="https://raw.githubusercontent.com/vorburger/opendaylight-eclipse-setup/master/org.opendaylight.projects.setup#/"/>
+      -->  
 </setup:Index>
