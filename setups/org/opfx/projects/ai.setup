@@ -3,10 +3,8 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore"
     name="ai"
     label="Artificial Intelligence">
   <setupTask
@@ -16,13 +14,13 @@
     <description></description>
   </setupTask>
   <setupTask
-      xsi:type="setup.p2:P2Task">
+      xsi:type="setup.p2:P2Task"
+      label="PyDev"
+      licenseConfirmationDisabled="true">
     <requirement
-        name="org.python.pydev.feature.feature.group"
-        versionRange="(4.5.4,4.5.9]"/>
+        name="org.python.pydev.feature.feature.group"/>
     <requirement
-        name="org.python.pydev.mylyn.feature.feature.group"
-        versionRange="(0.6.0,1.0.0]"/>
+        name="org.python.pydev.mylyn.feature.feature.group"/>
     <repository
         url="http://pydev.org/updates"/>
     <description>
@@ -31,23 +29,19 @@
     </description>
   </setupTask>
   <setupTask
-      xsi:type="jdt:JRETask"
-      version="JavaSE-1.7"
-      location="${jre.location-1.7}">
-    <description>
-      Define the JRE needed to compile and run the Java
-      projects of ${scope.project.label}
-    </description>
-  </setupTask>
-  <setupTask
       xsi:type="setup:CompoundTask"
       id="org.eclipse.ant.variables"
       name="Variables">
     <setupTask
         xsi:type="setup:VariableTask"
-        id=""
         name="scope.project.group"
         value="ai"
+        storageURI="scope://Workspace"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="scope.project.kind"
+        name="scope.project.kind"
+        value=""
         storageURI="scope://Workspace"/>
     <setup:VariableTask
         name="github.user.id"
@@ -57,51 +51,6 @@
         xmlns:setup="http://www.eclipse.org/oomph/setup/1.0">
 			<description>The user ID of the Github account</description>
 		</setup:VariableTask>
-  </setupTask>
-  <setupTask
-      xsi:type="setup:CompoundTask"
-      name="Preferences">
-    <setupTask
-        xsi:type="setup:CompoundTask"
-        name="General">
-      <setupTask
-          xsi:type="setup:CompoundTask"
-          name="Capabilities"/>
-      <setupTask
-          xsi:type="setup:CompoundTask"
-          name="Perspectives">
-        <setupTask
-            xsi:type="setup:PreferenceTask"
-            id=""
-            key="/instance/org.eclipse.ui/defaultPerspectiveId"
-            value="org.eclipse.jdt.ui.JavaPerspective">
-          <description>Make the Java perspective the default perspective</description>
-        </setupTask>
-        <description>
-          Container for the
-          &quot;Window->Preferences->General->Perspectives&quot; preferences
-        </description>
-      </setupTask>
-    </setupTask>
-    <description></description>
-  </setupTask>
-  <setupTask
-      xsi:type="setup:ResourceCreationTask"
-      content="MAX_RECENT_WORKSPACES=5&#xA;RECENT_WORKSPACES=${workspace.location|property}&#xA;RECENT_WORKSPACES_PROTOCOL=3&#xA;SHOW_WORKSPACE_SELECTION_DIALOG=true&#xA;eclipse.preferences.version=1&#xA;"
-      targetURL="configuration:/.settings/org.eclipse.ui.ide.prefs"
-      encoding="UTF-8">
-    <description>
-      Suppress prompt for default workspace already upon very
-      first start
-    </description>
-  </setupTask>
-  <setupTask
-      xsi:type="setup:EclipseIniTask"
-      excludedTriggers="STARTUP"
-      option="-Dperspective"
-      value="=org.eclipse.jdt.ui.JavaPerspective"
-      vm="true">
-    <description></description>
   </setupTask>
   <project name="default"
       label="New Project">
