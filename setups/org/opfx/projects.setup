@@ -157,7 +157,7 @@
         id="install.root"
         type="FOLDER"
         name="install.root"
-        defaultValue="${user.home}"
+        defaultValue="${opts.install.root}"
         label="Installation folder">
       <description>The root of the installation directory</description>
     </setupTask>
@@ -612,5 +612,6 @@
       value="=${user.home}"
       vm="true"/>
   <project href="projects/oomph.setup#/"/>
+   <project href="projects/ai.setup#/"/>
   <description>The opfx's Eclipse based projects catalog.</description>
 </setup:ProjectCatalog>

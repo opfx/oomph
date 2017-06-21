@@ -26,7 +26,8 @@ GOTO :CASE_DEFAULT
 :CASE_INSTALL
 	echo Launching installer...		
 	echo on
-	start ..\..\setup\eclipse-inst.exe -vmargs -Dinstall.path="%INSTALLPATH%" -Duser.home="%USERPROFILE%" -Doomph.redirection.setups="http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/->%setups%"
+	start ..\..\setup\eclipse-inst.exe -vmargs -Dopts.install.root="%INSTALLPATH%" -Duser.home="%USERPROFILE%" -Doomph.redirection.setups="http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/->%setups%"
+	
 	
 	@echo off
 	GOTO CASE_RETURN
