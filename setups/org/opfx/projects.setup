@@ -659,5 +659,7 @@
   <project href="projects/ai.setup#/"/>
   <project href="projects/ant.setup#/"/>
   <project href="projects/php.setup#/"/>
+  <project href="projects/jenkins.setup#/"/>
+  <project href="projects/arduino.setup#/"/>
   <description>The opfx's Eclipse based projects catalog.</description>
 </setup:ProjectCatalog>
