@@ -644,8 +644,20 @@
     <repository
         url="http://download.eclipse.org/mylyn/releases/latest"/>
   </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="JDT"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.eclipse.jdt.feature.group"/>
+    <description>
+      Install the tools needed in the IDE to work with the
+      source code for ${scope.project.label}
+    </description>
+  </setupTask>
   <project href="projects/oomph.setup#/"/>
   <project href="projects/ai.setup#/"/>
+  <project href="projects/ant.setup#/"/>
   <project href="projects/php.setup#/"/>
   <description>The opfx's Eclipse based projects catalog.</description>
 </setup:ProjectCatalog>
