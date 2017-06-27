@@ -117,33 +117,27 @@
           label="HTTPS (read-only, anonymous)"/>
       <description>Choose from the available Github URIs</description>
     </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="scope.project.catalog.page"
+        name="scope.project.catalog.page"
+        value=""
+        storageURI="scope://Workspace"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="scope.project.catalog.section"
+        name="scope.project.catalog.section"
+        value=""
+        storageURI="scope://Workspace"/>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
       name="Configuration Variables">
     <setupTask
         xsi:type="setup:VariableTask"
-        id="oomph.setups.remote.url"
-        name="oomph.setups.remote.url"
-        value="https://raw.githubusercontent.com/opfx/oomph/master/setups/"
-        storageURI="scope://Workspace"
-        label="">
-      <description>Location of the setup files. Can be set to a local path (i.e. file:///C:/work/opfx/repo/.git/oomph/oomph/setups/) to test psf</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        id="oomph.setups.local.url"
-        name="oomph.setups.local.url"
-        value="file:///C:/work/opfx/repo/.git/oomph/setups/"
-        storageURI="scope://Workspace"
-        label="">
-      <description>Location of the setup files. Can be set to a local path (i.e. file:///C:/work/opfx/repo/.git/oomph/oomph/setups/) to test psf</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup:VariableTask"
         id="oomph.setups.location.url"
         name="oomph.setups.location.url"
-        value="${oomph.setups.local.url}"
+        value="https://raw.githubusercontent.com/opfx/oomph/master/setups/"
         storageURI="scope://Workspace"
         label="">
       <description>Location of the setup files. Can be set to a local url (for development and testing purposes) or a remote url</description>
@@ -157,7 +151,8 @@
         id="install.root"
         type="FOLDER"
         name="install.root"
-        defaultValue="${opts.install.root}"
+        defaultValue="${opts.install.path/|lower}"
+        storageURI="scope://Installation"
         label="Installation folder">
       <description>The root of the installation directory</description>
     </setupTask>
@@ -166,7 +161,7 @@
         id="installation.location"
         type="FOLDER"
         name="installation.location"
-        value="${install.root/tool/eclipse|lower}"
+        value="${install.root/tool/eclipse/}"
         label="">
       <description></description>
     </setupTask>
@@ -175,8 +170,7 @@
         id="workspace.location"
         type="FOLDER"
         name="workspace.location"
-        value="${install.root/proj/|lower}${scope.project.group/|lower}${scope.project.kind/|lower}${scope.project.stream.name/|lower}"
-        defaultValue=""
+        value="${install.root/proj/}${scope.project.catalog.section/|lower}${scope.project.catalog.page/|lower}${scope.project.stream.name/|lower}"
         storageURI="scope://Workspace"
         label="${scope.project.label}'s workspace">
       <description>The location of the project's workspace</description>
@@ -186,7 +180,7 @@
         id="git.repository.location"
         type="FOLDER"
         name="git.repository.location"
-        value="${install.root/repo/.git|lower}"
+        value="${install.root/repo/.git/}"
         label="Git Repository Root">
       <description></description>
     </setupTask>
@@ -196,26 +190,10 @@
         type="FOLDER"
         name="installation.absoluteProductFolder"
         value="${installation.location/}${installation.relativeProductFolder/|lower}"
+        storageURI="scope://Installation"
         label="Absolute product installation folder">
       <description>Used to for ResourceCreation task that need to create resources in the product folder</description>
     </setupTask>
-  </setupTask>
-  <setupTask
-      xsi:type="setup:CompoundTask"
-      name="Pattern Definition Variables">
-    <setupTask
-        xsi:type="setup:VariableTask"
-        id="pattern.jenkins.job.path"
-        name="pattern.jenkins.job.path"
-        value="job/${scope.project.group}/job/${scope.project.stream.name}/job/${scope.project.kind}/"
-        storageURI="scope://Workspace"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        id="pattern.project.psf.path"
-        name="pattern.project.psf.path"
-        value="psf/${scope.project.group}/${scope.project.kind}/${scope.project.name}/${scope.project.stream.name}.psf"
-        storageURI="scope://Workspace"/>
-    <description>Definition of the patterns used throughout the setup files</description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
@@ -579,39 +557,42 @@
     <description></description>
   </setupTask>
   <setupTask
-      xsi:type="setup:ResourceCreationTask"
-      content="MAX_RECENT_WORKSPACES=5&#xA;RECENT_WORKSPACES=${workspace.location|property}&#xA;RECENT_WORKSPACES_PROTOCOL=3&#xA;SHOW_WORKSPACE_SELECTION_DIALOG=true&#xA;eclipse.preferences.version=1&#xA;"
-      targetURL="configuration:/.settings/org.eclipse.ui.ide.prefs"
-      encoding="UTF-8">
-    <description>
-      Suppress prompt for default workspace already upon very
-      first start
-    </description>
+      xsi:type="setup:CompoundTask"
+      name="Eclipse Ini">
+    <setupTask
+        xsi:type="setup:EclipseIniTask"
+        option="-Duser.home"
+        value="=${user.home}"
+        vm="true"/>
+    <setupTask
+        xsi:type="setup:EclipseIniTask"
+        option="-Doomph.setup"
+        value="=true"
+        vm="true"/>
   </setupTask>
   <setupTask
-      xsi:type="setup:ResourceCreationTask"
-      id="eclipse.bat"
-      content="@echo off&#xA;SET CWD=%~dp0&#xA;SET HOME=${user.home}&#xA;start %CWD%\eclipse.exe "
-      targetURL="${installation.absoluteProductFolder/eclipse.bat|uri}"
-      encoding="UTF-8">
-    <description>Creates an eclipse.bat to allow for customized startup of eclipse</description>
+      xsi:type="setup:CompoundTask"
+      name="Resource Creation">
+    <setupTask
+        xsi:type="setup:ResourceCreationTask"
+        content="MAX_RECENT_WORKSPACES=5&#xA;RECENT_WORKSPACES=${workspace.location|property}&#xA;RECENT_WORKSPACES_PROTOCOL=3&#xA;SHOW_WORKSPACE_SELECTION_DIALOG=true&#xA;eclipse.preferences.version=1&#xA;"
+        targetURL="configuration:/.settings/org.eclipse.ui.ide.prefs"
+        encoding="UTF-8">
+      <description>
+        Suppress prompt for default workspace already upon very
+        first start
+      </description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:ResourceCreationTask"
+        id="eclipse.bat"
+        content="@echo off&#xA;SET CWD=%~dp0&#xA;SET HOME=${user.home}&#xA;start %CWD%\eclipse.exe "
+        targetURL="${installation.absoluteProductFolder/eclipse.bat|uri}"
+        encoding="UTF-8">
+      <description>Creates an eclipse.bat to allow for customized startup of eclipse</description>
+    </setupTask>
   </setupTask>
-  <setupTask
-      xsi:type="setup:EclipseIniTask"
-      option="-Doomph.setup"
-      value="=true"
-      vm="true"/>
-  <setupTask
-      xsi:type="setup:EclipseIniTask"
-      option="-Doomph.setup"
-      value="=true"
-      vm="true"/>
-  <setupTask
-      xsi:type="setup:EclipseIniTask"
-      option="-Duser.home"
-      value="=${user.home}"
-      vm="true"/>
   <project href="projects/oomph.setup#/"/>
-   <project href="projects/ai.setup#/"/>
+  <project href="projects/ai.setup#/"/>
   <description>The opfx's Eclipse based projects catalog.</description>
 </setup:ProjectCatalog>

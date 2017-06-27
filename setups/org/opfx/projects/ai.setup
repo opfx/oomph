@@ -8,12 +8,6 @@
     name="ai"
     label="Artificial Intelligence">
   <setupTask
-      xsi:type="setup:WorkspaceTask"
-      id="workspace"
-      excludedTriggers="MANUAL">
-    <description></description>
-  </setupTask>
-  <setupTask
       xsi:type="setup.p2:P2Task"
       label="PyDev"
       licenseConfirmationDisabled="true">
@@ -34,14 +28,9 @@
       name="Variables">
     <setupTask
         xsi:type="setup:VariableTask"
-        name="scope.project.group"
+        id="scope.project.catalog.section"
+        name="scope.project.catalog.section"
         value="ai"
-        storageURI="scope://Workspace"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        id="scope.project.kind"
-        name="scope.project.kind"
-        value=""
         storageURI="scope://Workspace"/>
     <setup:VariableTask
         name="github.user.id"
@@ -52,13 +41,15 @@
 			<description>The user ID of the Github account</description>
 		</setup:VariableTask>
   </setupTask>
-  <project name="default"
-      label="New Project">
+  <project name="empty"
+      label="(No Projects)"
+      logicalProjectContainer="/">
     <stream
         name="master"
         label="master"/>
+    <description>Installs the development stack for artificial inteligence projects</description>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
-      href="index:/org.eclipse.setup#//@projectCatalogs[name='org.opfx']"/>
+      href="index:/org.eclipse.setup#//@projectCatalogs[name='projects']"/>
 </setup:Project>

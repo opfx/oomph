@@ -26,7 +26,7 @@
         id="installation.location"
         type="FOLDER"
         name="installation.location"
-        value="${install.root/tool/eclipse/oomph|lower}"
+        value="${install.root/tool/eclipse/oomph}"
         label="">
       <description>Custom installation for oomph editor (required because we don't to modify the editor while testing changes)</description>
     </setupTask>
@@ -35,28 +35,16 @@
         id="workspace.location"
         type="FOLDER"
         name="workspace.location"
-        value="${install.root/proj/oomph/|lower}"
+        value="${install.root/proj/oomph/}"
         storageURI="scope://Workspace"
         label="${scope.project.label}'s workspace">
       <description>The location of the project's workspace</description>
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
-        id="scope.project.group"
-        name="scope.project.group"
-        value="oomph"
-        storageURI="scope://Workspace"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        id="scope.project.kind"
-        name="scope.project.kind"
-        value=""
-        storageURI="scope://Workspace"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
         id="oomph.git.clone.location"
         name="oomph.git.clone.location"
-        value="${git.repository.location/|lower}${scope.project.name}"
+        value="${git.repository.location/}${scope.project.name}"
         storageURI="scope://Workspace">
       <description>The folder where the 'oomph' repository will be cloned in.</description>
     </setupTask>
@@ -64,7 +52,7 @@
         xsi:type="setup:VariableTask"
         id="eclipse.oomph.git.clone.location"
         name="eclipse.oomph.git.clone.location"
-        value="${git.repository.location/org.eclipse.oomph|lower}"
+        value="${git.repository.location/org.eclipse.oomph}"
         storageURI="scope://Workspace">
       <description>The folder where the official (eclipse) 'oomph' repository will be cloned in.</description>
     </setupTask>
@@ -95,7 +83,7 @@
           rootFolder="${oomph.git.clone.location}"
           locateNestedProjects="true"/>
       <sourceLocator
-          rootFolder="${eclipse.oomph.git.clone.location}/setups"
+          rootFolder="${eclipse.oomph.git.clone.location/}setups"
           locateNestedProjects="true"/>
     </setupTask>
   </setupTask>
