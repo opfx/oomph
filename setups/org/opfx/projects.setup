@@ -4,6 +4,7 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     name="org.opfx"
     label="Opfx Projects">
   <setupTask
@@ -16,7 +17,7 @@
       id="workspace"/>
   <setupTask
       xsi:type="setup:CompoundTask"
-      id="org.eclipse.ant.variables"
+      id="org.opfx.variables"
       name="Variables">
     <setupTask
         xsi:type="setup:VariableTask"
@@ -197,6 +198,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
+      id="org.opfx.preferences"
       name="Preferences">
     <setupTask
         xsi:type="setup:CompoundTask"
@@ -558,6 +560,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
+      id="org.opfx.eclipse.ini"
       name="Eclipse Ini">
     <setupTask
         xsi:type="setup:EclipseIniTask"
@@ -572,6 +575,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
+      id="org.opfx.resource.creation"
       name="Resource Creation">
     <setupTask
         xsi:type="setup:ResourceCreationTask"
@@ -592,7 +596,63 @@
       <description>Creates an eclipse.bat to allow for customized startup of eclipse</description>
     </setupTask>
   </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="Oomph"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.eclipse.oomph.setup.feature.group"/>
+    <repository
+        url="${oomph.update.url}"/>
+    <repository
+        url="http://download.eclipse.org/modeling/emf/emf/updates/2.10/core/R201405190339"/>
+    <repository
+        url="http://download.eclipse.org/egit/updates"/>
+    <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="EGit"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.eclipse.egit.feature.group"/>
+    <requirement
+        name="org.eclipse.egit.mylyn.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.git.feature.group"/>
+    <repository
+        url="http://download.eclipse.org/egit/updates"/>
+    <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="Mylyn"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.eclipse.mylyn.github.feature.feature.group"
+        filter=""/>
+    <requirement
+        name="org.eclipse.mylyn.builds.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.hudson.feature.group"
+        versionRange="[1.12.2,2.0.0)"/>
+    <requirement
+        name="org.eclipse.mylyn.ide_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.versions.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.wikitext_feature.feature.group"/>
+    <repository
+        url="http://download.eclipse.org/egit/github/updates/"/>
+    <repository
+        url="http://download.eclipse.org/mylyn/releases/latest"/>
+  </setupTask>
   <project href="projects/oomph.setup#/"/>
   <project href="projects/ai.setup#/"/>
+  <project href="projects/php.setup#/"/>
   <description>The opfx's Eclipse based projects catalog.</description>
 </setup:ProjectCatalog>

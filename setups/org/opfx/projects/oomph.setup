@@ -11,15 +11,8 @@
     name="oomph"
     label="Oomph">
   <setupTask
-      xsi:type="setup.p2:P2Task"
-      label="Oomph SDK"
-      licenseConfirmationDisabled="true">
-    <requirement
-        name="org.eclipse.oomph.setup.sdk.feature.group"/>
-    <description></description>
-  </setupTask>
-  <setupTask
       xsi:type="setup:CompoundTask"
+      id="org.opfx.oomph.variables"
       name="Variables">
     <setupTask
         xsi:type="setup:VariableTask"
@@ -58,7 +51,16 @@
     </setupTask>
   </setupTask>
   <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="Oomph SDK"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.eclipse.oomph.setup.sdk.feature.group"/>
+    <description></description>
+  </setupTask>
+  <setupTask
       xsi:type="setup:CompoundTask"
+      id="org.opfx.oomph.tasks"
       name="Tasks">
     <setupTask
         xsi:type="git:GitCloneTask"

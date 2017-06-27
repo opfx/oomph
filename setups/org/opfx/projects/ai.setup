@@ -8,23 +8,8 @@
     name="ai"
     label="Artificial Intelligence">
   <setupTask
-      xsi:type="setup.p2:P2Task"
-      label="PyDev"
-      licenseConfirmationDisabled="true">
-    <requirement
-        name="org.python.pydev.feature.feature.group"/>
-    <requirement
-        name="org.python.pydev.mylyn.feature.feature.group"/>
-    <repository
-        url="http://pydev.org/updates"/>
-    <description>
-      Install the tools needed in the IDE to work with the
-      source code for ${scope.project.label}
-    </description>
-  </setupTask>
-  <setupTask
       xsi:type="setup:CompoundTask"
-      id="org.eclipse.ant.variables"
+      id="org.opfx.ai.variables"
       name="Variables">
     <setupTask
         xsi:type="setup:VariableTask"
@@ -41,6 +26,21 @@
 			<description>The user ID of the Github account</description>
 		</setup:VariableTask>
   </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="PyDev"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.python.pydev.feature.feature.group"/>
+    <requirement
+        name="org.python.pydev.mylyn.feature.feature.group"/>
+    <repository
+        url="http://pydev.org/updates"/>
+    <description>
+      Install the tools needed in the IDE to work with the
+      source code for ${scope.project.label}
+    </description>
+  </setupTask>
   <project name="empty"
       label="(No Projects)"
       logicalProjectContainer="/">
@@ -51,5 +51,5 @@
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
-      href="index:/org.eclipse.setup#//@projectCatalogs[name='projects']"/>
+      href="index:/org.eclipse.setup#//@projectCatalogs[name='org.opfx']"/>
 </setup:Project>
