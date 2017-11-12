@@ -3,10 +3,21 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore"
     name="php"
     label="PHP">
+  <setupTask
+      xsi:type="jdt:JRETask"
+      version="JavaSE-1.7"
+      location="${jre.location-1.7}">
+    <description>
+      Define the JRE needed to compile and run the Java
+      projects of ${scope.project.label}
+    </description>
+  </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
       id="org.opfx.php.variables"
@@ -28,6 +39,30 @@
         versionRange="13.6.0"/>
     <repository
         url="http://downloads.zend.com/studio-eclipse/updates/win-13+"/>
+    <description>
+      Install the tools needed in the IDE to work with the
+      source code for ${scope.project.label}
+    </description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="Ivy"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.apache.ivy.feature.feature.group"
+        versionRange="2.4.0"/>
+    <requirement
+        name="org.apache.ivy.eclipse.ant.feature.feature.group"
+        versionRange="2.4.0"/>
+    <requirement
+        name="org.apache.ivyde.feature.feature.group"
+        versionRange="2.2.0"/>
+    <requirement
+        name="org.apache.ivyde.eclipse.resolvevisualizer.feature.feature.group"
+        versionRange="2.2.0"
+        filter=""/>
+    <repository
+        url="http://www.apache.org/dist/ant/ivyde/updatesite"/>
     <description>
       Install the tools needed in the IDE to work with the
       source code for ${scope.project.label}
@@ -442,14 +477,7 @@
       <description></description>
     </setupTask>
   </setupTask>
-  <project name="empty"
-      label="(No Projects)"
-      logicalProjectContainer="/">
-    <stream
-        name="master"
-        label="master"/>
-    <description>Installs the development stack for PHP but it does not checkout any projects.</description>
-  </project>
+  <project href="php/projects.setup#/"/>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
       href="index:/org.eclipse.setup#//@projectCatalogs[name='org.opfx']"/>
