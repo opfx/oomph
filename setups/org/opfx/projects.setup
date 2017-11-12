@@ -200,6 +200,13 @@
       xsi:type="setup:CompoundTask"
       id="org.opfx.preferences"
       name="Preferences">
+    <annotation
+        source="http://www.eclipse.org/oomph/setup/UserPreferences">
+      <detail
+          key="/instance/org.eclipse.mylyn.monitor.ui/org.eclipse.mylyn.monitor.activity.tracking.enabled">
+        <value>ignore</value>
+      </detail>
+    </annotation>
     <setupTask
         xsi:type="setup:CompoundTask"
         name="General">
@@ -549,6 +556,18 @@
         </setupTask>
       </setupTask>
     </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Mylyn">
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          name="Task">
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.mylyn.monitor.ui/org.eclipse.mylyn.monitor.activity.tracking.enabled"
+            value="true"/>
+      </setupTask>
+    </setupTask>
     <description></description>
   </setupTask>
   <setupTask
@@ -613,6 +632,8 @@
         name="org.eclipse.egit.mylyn.feature.group"/>
     <requirement
         name="org.eclipse.mylyn.git.feature.group"/>
+    <requirement
+        name="org.eclipse.egit.gitflow.feature.feature.group"/>
     <repository
         url="http://download.eclipse.org/egit/updates"/>
     <description></description>
