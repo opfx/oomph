@@ -39,6 +39,9 @@
       </setupTask>
     </setupTask>
     <stream
+        name="develop"
+        label="develop"/>
+    <stream
         name="master"
         label="master"/>
   </project>
