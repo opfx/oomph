@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Project
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
+    xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
+    xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore"
+    name="hermes"
+    label="Hermes">
+  <setupTask
+      xsi:type="jdt:JRETask"
+      version="JavaSE-1.7"
+      location="${jre.location-1.7}">
+    <description>
+      Define the JRE needed to compile and run the Java
+      projects of ${scope.project.label}
+    </description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      id="org.opfx.hermes.variables"
+      name="Variables">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="scope.project.catalog.section"
+        name="scope.project.catalog.section"
+        value="hermes"
+        storageURI="scope://Workspace"
+        label=""/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="scope.project.organization"
+        name="scope.project.organization"
+        value="opfx-hermes"
+        storageURI="scope://Workspace"/>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      label="Ivy"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.apache.ivy.feature.feature.group"
+        versionRange="2.4.0"/>
+    <requirement
+        name="org.apache.ivy.eclipse.ant.feature.feature.group"
+        versionRange="2.4.0"/>
+    <requirement
+        name="org.apache.ivyde.feature.feature.group"
+        versionRange="2.2.0"/>
+    <requirement
+        name="org.apache.ivyde.eclipse.resolvevisualizer.feature.feature.group"
+        versionRange="2.2.0"
+        filter=""/>
+    <repository
+        url="http://www.apache.org/dist/ant/ivyde/updatesite"/>
+    <description>
+      Install the tools needed in the IDE to work with the
+      source code for ${scope.project.label}
+    </description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      id="zendstudio"
+      label="Zend Studio"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="com.zend.php.productivity.feature.group"
+        versionRange="13.6.1"/>
+    <repository
+        url="http://downloads.zend.com/studio-eclipse/updates/win-13+"/>
+    <description>
+      Install the tools needed in the IDE to work with the
+      source code for ${scope.project.label}
+    </description>
+  </setupTask>
+  <project name="empty"
+      label="(empty workspace)">
+    <stream
+        name="develop"
+        label="develop"/>
+    <logicalProjectContainer
+        xsi:type="setup:Project"
+        href="php/projects.setup#/"/>
+    <description>Installs the development stack for PHP but it does not checkout any projects.</description>
+  </project>
+  <project name="main"
+      label="main"
+      logicalProjectContainer="/">
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Tasks">
+      <setupTask
+          xsi:type="git:GitCloneTask"
+          id="main.git.clone"
+          location="${git.repository.location/}${scope.project.name}"
+          remoteURI="https://github.com/${scope.project.organization}/${scope.project.name}"
+          pushURI="">
+        <description>Clones the main hermes site repository</description>
+      </setupTask>
+      <setupTask
+          xsi:type="projects:ProjectsImportTask">
+        <sourceLocator
+            rootFolder="${main.git.clone.location}"
+            locateNestedProjects="true"/>
+      </setupTask>
+    </setupTask>
+    <stream
+        name="develop"
+        label="develop"/>
+    <stream
+        name="master"
+        label="master"/>
+    <description></description>
+  </project>
+  <logicalProjectContainer
+      xsi:type="setup:ProjectCatalog"
+      href="index:/org.eclipse.setup#//@projectCatalogs[name='org.opfx']"/>
+</setup:Project>
