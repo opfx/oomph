@@ -5,12 +5,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
+    xmlns:mylyn="http://www.eclipse.org/oomph/setup/mylyn/1.0"
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore"
     name="hermes"
     label="Hermes">
+  <setupTask
+      xsi:type="setup:WorkspaceTask"
+      id="workspace"
+      excludedTriggers="MANUAL"/>
   <setupTask
       xsi:type="jdt:JRETask"
       version="JavaSE-1.7"
@@ -35,8 +40,15 @@
         xsi:type="setup:VariableTask"
         id="scope.project.organization"
         name="scope.project.organization"
-        value="opfx-hermes"
+        value="opfx-${scope.project.catalog.section}"
         storageURI="scope://Workspace"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="git.remote.uri"
+        value="https://github.com/${scope.project.organization}/${scope.project.name}"
+        storageURI="scope://Workspace">
+      <description>The uri of the project's remote repository uri</description>
+    </setupTask>
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
@@ -92,12 +104,25 @@
       logicalProjectContainer="/">
     <setupTask
         xsi:type="setup:CompoundTask"
+        name="Variables">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          id="main.git.clone.location"
+          name="main.git.clone.location"
+          value="${git.repository.location/}${scope.project.catalog.section/}${scope.project.name}"
+          storageURI="scope://Workspace"
+          label="">
+        <description>The folder in which the project repository will be cloned in.</description>
+      </setupTask>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
         name="Tasks">
       <setupTask
           xsi:type="git:GitCloneTask"
           id="main.git.clone"
-          location="${git.repository.location/}${scope.project.name}"
-          remoteURI="https://github.com/${scope.project.organization}/${scope.project.name}"
+          location="${git.repository.location/}${scope.project.catalog.section/}${scope.project.name}"
+          remoteURI="${git.remote.uri}"
           pushURI="">
         <description>Clones the main hermes site repository</description>
       </setupTask>
@@ -106,6 +131,24 @@
         <sourceLocator
             rootFolder="${main.git.clone.location}"
             locateNestedProjects="true"/>
+      </setupTask>
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="${git.remote.uri}"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="${scope.project.name}(all)"
+            url="${git.remote.uri}">
+          <attribute
+              key="state"
+              value="open::closed::"/>
+          <attribute
+              key="labels"
+              value="bug::duplicate::enhancement::good first issue::help wanted::invalid::question::wontfix::"/>
+        </query>
+        <description></description>
       </setupTask>
     </setupTask>
     <stream
