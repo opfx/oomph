@@ -10,6 +10,10 @@
     name="php"
     label="PHP">
   <setupTask
+      xsi:type="setup:WorkspaceTask"
+      id="workspace"
+      excludedTriggers="MANUAL"/>
+  <setupTask
       xsi:type="jdt:JRETask"
       version="JavaSE-1.7"
       location="${jre.location-1.7}">
@@ -28,6 +32,16 @@
         name="scope.project.catalog.section"
         value="php"
         storageURI="scope://Workspace"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="workspace.location"
+        type="FOLDER"
+        name="workspace.location"
+        value="${install.root/proj/}${scope.project.catalog.section/|lower}${scope.project.stream.name/|lower}"
+        storageURI="scope://Workspace"
+        label="${scope.project.label}'s workspace">
+      <description>The location of the project's workspace</description>
+    </setupTask>
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"

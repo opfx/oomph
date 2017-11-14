@@ -13,9 +13,6 @@
     <description></description>
   </setupTask>
   <setupTask
-      xsi:type="setup:WorkspaceTask"
-      id="workspace"/>
-  <setupTask
       xsi:type="setup:CompoundTask"
       id="org.opfx.variables"
       name="Variables">
@@ -937,6 +934,11 @@
         xsi:type="setup:EclipseIniTask"
         option="-Doomph.setup"
         value="=true"
+        vm="true"/>
+    <setupTask
+        xsi:type="setup:EclipseIniTask"
+        option="-Dopts.install.path"
+        value="=${install.root}"
         vm="true"/>
   </setupTask>
   <setupTask

@@ -49,6 +49,16 @@
         storageURI="scope://Workspace">
       <description>The uri of the project's remote repository uri</description>
     </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="workspace.location"
+        type="FOLDER"
+        name="workspace.location"
+        value="${install.root/proj/}${scope.project.catalog.section/|lower}${scope.project.stream.name/|lower}"
+        storageURI="scope://Workspace"
+        label="${scope.project.label}'s workspace">
+      <description>The location of the project's workspace</description>
+    </setupTask>
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
@@ -109,10 +119,19 @@
           xsi:type="setup:VariableTask"
           id="main.git.clone.location"
           name="main.git.clone.location"
-          value="${git.repository.location/}${scope.project.catalog.section/}${scope.project.name}"
+          value="${git.repository.location/}${scope.project.name}"
           storageURI="scope://Workspace"
           label="">
         <description>The folder in which the project repository will be cloned in.</description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          id="main.git.remote.uri"
+          name="main.git.remote.uri"
+          value="https://github.com/opfx-hermes/${scope.project.name}"
+          storageURI="scope://Workspace"
+          label="">
+        <description></description>
       </setupTask>
     </setupTask>
     <setupTask
@@ -121,13 +140,14 @@
       <setupTask
           xsi:type="git:GitCloneTask"
           id="main.git.clone"
-          location="${git.repository.location/}${scope.project.catalog.section/}${scope.project.name}"
-          remoteURI="${git.remote.uri}"
+          location="${git.repository.location/}${scope.project.name}"
+          remoteURI="${main.git.remote.uri}"
           pushURI="">
         <description>Clones the main hermes site repository</description>
       </setupTask>
       <setupTask
-          xsi:type="projects:ProjectsImportTask">
+          xsi:type="projects:ProjectsImportTask"
+          id="main.import">
         <sourceLocator
             rootFolder="${main.git.clone.location}"
             locateNestedProjects="true"/>
@@ -135,18 +155,15 @@
       <setupTask
           xsi:type="mylyn:MylynQueriesTask"
           connectorKind="github"
-          repositoryURL="${git.remote.uri}"
+          repositoryURL="${main.git.remote.uri}"
           userID="${github.user.id}"
           password="${github.user.password}">
         <query
-            summary="${scope.project.name}(all)"
-            url="${git.remote.uri}">
+            summary="${scope.project.name} (all)"
+            url="${main.git.remote.uri}">
           <attribute
               key="state"
               value="open::closed::"/>
-          <attribute
-              key="labels"
-              value="bug::duplicate::enhancement::good first issue::help wanted::invalid::question::wontfix::"/>
         </query>
         <description></description>
       </setupTask>
@@ -158,6 +175,77 @@
         name="master"
         label="master"/>
     <description></description>
+  </project>
+  <project name="php"
+      label="PHP">
+    <project
+        name="opfx"
+        label="opfx">
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          name="Variables">
+        <setupTask
+            xsi:type="setup:VariableTask"
+            id="opfx.git.clone.location"
+            name="opfx.git.clone.location"
+            value="${git.repository.location/}${scope.project.name}"
+            storageURI="scope://Workspace"
+            label="">
+          <description>The folder in which the project repository will be cloned in.</description>
+        </setupTask>
+        <setupTask
+            xsi:type="setup:VariableTask"
+            id="opfx.git.remote.uri"
+            name="opfx.git.remote.uri"
+            value="https://github.com/opfx-php/${scope.project.name}"
+            storageURI="scope://Workspace"
+            label=""/>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          name="Tasks">
+        <setupTask
+            xsi:type="git:GitCloneTask"
+            id="opfx.git.clone"
+            location="${git.repository.location/}${scope.project.name}"
+            remoteURI="${opfx.git.remote.uri}"
+            pushURI="">
+          <description>Clones the opfx library repository</description>
+        </setupTask>
+        <setupTask
+            xsi:type="projects:ProjectsImportTask"
+            id="opfx.import">
+          <sourceLocator
+              rootFolder="${opfx.git.clone.location}"
+              locateNestedProjects="true"/>
+        </setupTask>
+        <setupTask
+            xsi:type="mylyn:MylynQueriesTask"
+            connectorKind="github"
+            repositoryURL="${opfx.git.remote.uri}"
+            userID="${github.user.id}"
+            password="${github.user.password}">
+          <query
+              summary="${scope.project.name} (all)"
+              url="${opfx.git.remote.uri}">
+            <attribute
+                key="state"
+                value="open::closed::"/>
+          </query>
+          <description></description>
+        </setupTask>
+      </setupTask>
+      <stream
+          name="develop"
+          label="develop"/>
+      <stream
+          name="master"
+          label="master"/>
+      <logicalProjectContainer
+          xsi:type="setup:Project"
+          href="index:/org.eclipse.setup#//@projectCatalogs[name='org.opfx']/@projects[name='php']/@projects[name='projects']"/>
+      <description></description>
+    </project>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
