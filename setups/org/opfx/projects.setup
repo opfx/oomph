@@ -1032,6 +1032,17 @@
       source code for ${scope.project.label}
     </description>
   </setupTask>
+    <setupTask
+      xsi:type="setup.p2:P2Task"
+      id="atlassian"
+      label="Atlassian"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="com.atlassian.connector.eclipse.jira.feature.group"/>
+    <repository
+        url="http://update.atlassian.com/atlassian-eclipse-plugin/rest/e3.7/"/>
+    <description>Install JIRA-eclipse integration</description>
+  </setupTask>
   <project href="projects/oomph.setup#/"/>
   <project href="projects/ai.setup#/"/>
   <project href="projects/ant.setup#/"/>
