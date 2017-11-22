@@ -200,6 +200,10 @@
     <annotation
         source="http://www.eclipse.org/oomph/setup/UserPreferences">
       <detail
+          key="/instance/org.eclipse.core.runtime/line.separator">
+        <value>ignore</value>
+      </detail>
+      <detail
           key="/instance/org.eclipse.mylyn.monitor.ui/org.eclipse.mylyn.monitor.activity.tracking.enabled">
         <value>ignore</value>
       </detail>
@@ -236,6 +240,16 @@
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.ui.workbench/org.eclipse.ui.commands"
             value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;org.eclipse.ui.commands>&#xD;&#xA;&lt;keyBinding contextId=&quot;org.eclipse.ui.contexts.window&quot; keyConfigurationId=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot; keySequence=&quot;CTRL+F6&quot;/>&#xD;&#xA;&lt;keyBinding contextId=&quot;org.eclipse.ui.contexts.window&quot; keyConfigurationId=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot; keySequence=&quot;CTRL+F6&quot;/>&#xD;&#xA;&lt;keyBinding commandId=&quot;org.eclipse.ui.window.nextEditor&quot; contextId=&quot;org.eclipse.ui.contexts.window&quot; keyConfigurationId=&quot;org.eclipse.ui.defaultAcceleratorConfiguration&quot; keySequence=&quot;CTRL+TAB&quot;/>&#xD;&#xA;&lt;/org.eclipse.ui.commands>"/>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          name="Workspace">
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.core.runtime/line.separator"
+            value="&#xA;">
+          <description>Sets the new line delimiter to unix line delimiter</description>
+        </setupTask>
       </setupTask>
     </setupTask>
     <setupTask
@@ -1032,7 +1046,7 @@
       source code for ${scope.project.label}
     </description>
   </setupTask>
-    <setupTask
+  <setupTask
       xsi:type="setup.p2:P2Task"
       id="atlassian"
       label="Atlassian"
