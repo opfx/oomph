@@ -37,15 +37,7 @@
       href="http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore#/"/>
       
   <productCatalog
-      href="org/opfx/products.setup#/"/>
+      href="opfx/products.setup#/"/>
   <projectCatalog
-      href="org/opfx/projects.setup#/"/>
-      <!--
-  <projectCatalog
-      href="https://raw.githubusercontent.com/ganzstudios/oomph/master/setups/com/ganz/projects.setup#/"/>
-      -->  
-      <!--
-      <projectCatalog
-      href="https://raw.githubusercontent.com/vorburger/opendaylight-eclipse-setup/master/org.opendaylight.projects.setup#/"/>
-      -->  
+      href="opfx/projects.setup#/"/>
 </setup:Index>
