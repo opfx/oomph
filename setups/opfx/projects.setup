@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:ProjectCatalog
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore"
+    name="opfx"
+    label="Opfx Projects">
+  <setupTask
+      xsi:type="setup:InstallationTask"
+      id="installation"/>
+  <setupTask
+      xsi:type="setup:WorkspaceTask"
+      id="workspace"/>
+  <setupTask
+      xsi:type="jdt:JRETask"
+      version="JavaSE-1.8"
+      location="${jre.location-1.8}"/>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="Variables">
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Options"/>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Deployment Layout">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          type="FOLDER"
+          name="deployment.path"
+          defaultValue="${opts.deployment.path/|lower}"
+          label="Deployment Path">
+        <description></description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          type="FOLDER"
+          name="workspace.path"
+          value="${deployment.path/proj/}"
+          storageURI="scope://Installation">
+        <description>The workspaces root path</description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          type="FOLDER"
+          name="repository.path"
+          value="${deployment.path/repo/}"
+          storageURI="scope://Installation">
+        <description>The workspaces root path</description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          id="installation.location"
+          type="FOLDER"
+          name="installation.location"
+          value="${deployment.path/tool/eclipse/}"
+          label="">
+        <description></description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          id="installation.absoluteProductFolder"
+          type="FOLDER"
+          name="installation.absoluteProductFolder"
+          value="${installation.location/}${installation.relativeProductFolder/|lower}"
+          storageURI="scope://Installation"
+          label="Absolute product installation folder">
+        <description>Used to for ResourceCreation task that need to create resources in the product folder</description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          id="workspace.location"
+          type="FOLDER"
+          name="workspace.location"
+          value="${workspace.path}${scope.project.root.name/|lower}"
+          storageURI="scope://Workspace"
+          label="${scope.project.label}'s workspace">
+        <description>The location of the project's workspace</description>
+      </setupTask>
+    </setupTask>
+  </setupTask>
+  <project href="projects/ant.setup#/"/>
+   <project href="projects/php/projects.setup#/"/>
+  <description>The opfx's Eclipse based projects catalog.</description>
+</setup:ProjectCatalog>
