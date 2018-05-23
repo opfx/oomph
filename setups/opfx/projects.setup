@@ -82,7 +82,7 @@
       </setupTask>
     </setupTask>
   </setupTask>
-  <project href="projects/ant.setup#/"/>
-   <project href="projects/php/projects.setup#/"/>
+  	<project href="projects/ant/projects.setup#/"/>
+  	<project href="projects/php/projects.setup#/"/>
   <description>The opfx's Eclipse based projects catalog.</description>
 </setup:ProjectCatalog>

@@ -3,14 +3,9 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:mylyn="http://www.eclipse.org/oomph/setup/mylyn/1.0"
-    xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore"
-    name="ant"
-    label="Ant">
-  <project name="ant-php"
-      label="PHP Ant Plugin">
+    name="ant-php"
+    label="PHP Ant Plugin">
     <setupTask
         xsi:type="setup:CompoundTask"
         name="Tasks">
@@ -42,9 +37,5 @@
     <logicalProjectContainer
         xsi:type="setup:Project"
         href="index:/org.eclipse.setup#//@projectCatalogs[name='opfx']/@projects[name='ant']"/>
-  </project>
-  <logicalProjectContainer
-      xsi:type="setup:ProjectCatalog"
-      href="index:/org.eclipse.setup#//@projectCatalogs[name='opfx']"/>
   <description></description>
 </setup:Project>
