@@ -29,7 +29,7 @@
       <setupTask
           xsi:type="setup:VariableTask"
           type="FOLDER"
-          name="deployment.path"
+          name="installation.root"
           defaultValue="${opts.deployment.path/|lower}"
           storageURI="scope://Installation"
           label="Deployment Path">
@@ -38,16 +38,16 @@
       <setupTask
           xsi:type="setup:VariableTask"
           type="FOLDER"
-          name="workspace.path"
-          value="${deployment.path/proj/}"
+          name="workspace.root"
+          value="${installation.root/proj/}"
           storageURI="scope://Installation">
         <description>The workspaces root path</description>
       </setupTask>
       <setupTask
           xsi:type="setup:VariableTask"
           type="FOLDER"
-          name="git.clone.path"
-          value="${deployment.path/repo/.git}"
+          name="git.clone.root"
+          value="${installation.root/repo/.git}"
           storageURI="scope://Installation">
         <description>The workspaces root path</description>
       </setupTask>
@@ -56,7 +56,7 @@
           id="installation.location"
           type="FOLDER"
           name="installation.location"
-          value="${deployment.path/tool/eclipse/}"
+          value="${installation.root/tool/eclipse/}"
           label="">
         <description></description>
       </setupTask>
@@ -75,7 +75,7 @@
           id="workspace.location"
           type="FOLDER"
           name="workspace.location"
-          value="${workspace.path}${scope.project.catalog.section.name/|lower}"
+          value="${workspace.root}${scope.project.catalog.section.name/|lower}"
           storageURI="scope://Workspace"
           label="${scope.project.label}'s workspace">
         <description>The location of the project's workspace</description>
@@ -170,7 +170,7 @@
         xsi:type="setup:VariableTask"
         type="FOLDER"
         name="git.clone.location"
-        value="${git.clone.path/}${scope.project.name}"/>
+        value="${git.clone.root/}${scope.project.name}"/>
     <setupTask
         xsi:type="setup:VariableTask"
         type="URI"
@@ -186,9 +186,8 @@
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
-        id="scope.project.catalog.section"
-        name="scope.project.catalog.section"
-        value=""
+        name="scope.project.catalog.section.name"
+        value="default"
         storageURI="scope://Workspace"/>
   </setupTask>
   <setupTask
@@ -1169,7 +1168,7 @@
         <setupTask
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.egit.core/core_defaultRepositoryDir"
-            value="${git.clone.path|canonical}">
+            value="${git.clone.root|canonical}">
           <description></description>
         </setupTask>
         <setupTask
@@ -1214,6 +1213,8 @@
       <description>Initializes the workbench layout</description>
     </setupTask>
   </setupTask>
+  <project href="projects/oomph.setup#/"/>
+  <project href="projects/empty.setup#/"/>
   <project href="projects/ant/projects.setup#/"/>
   <project href="projects/php/projects.setup#/"/>
   <description>The opfx's Eclipse based projects catalog.</description>

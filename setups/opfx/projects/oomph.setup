@@ -3,8 +3,12 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
+    xmlns:mylyn="http://www.eclipse.org/oomph/setup/mylyn/1.0"
+    xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore"
     name="oomph"
     label="Oomph">
   <setupTask
@@ -52,6 +56,60 @@
     <requirement
         name="org.eclipse.oomph.setup.sdk.feature.group"/>
     <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      id="org.opfx.oomph.tasks"
+      name="Tasks">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.oomph"
+        location="${git.clone.root}/${scope.project.name}"
+        remoteURI="https://github.com/opfx/oomph"
+        checkoutBranch="master">
+      <description>Clones the 'opfx' oomph setups</description>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.location}"
+          locateNestedProjects="true"/>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="${git.remote.uri}"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="${scope.project.name} (all)"
+          url="${git.remote.uri}">
+        <attribute
+            key="state"
+            value="open::"/>
+      </query>
+      <description></description>
+    </setupTask>
+   
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        disabled="true"
+        connectorKind="jira"
+        repositoryURL="${jira.url}"
+        userID="${jira.username}"
+        password="${jira.password}">
+      <query
+          summary="${scope.project.name} "
+          url="${jira.url}/issues/?jql=project+in+%28%22{$jira.project.key}%22%29+">
+        <attribute
+            key="FilterCustomUrl"
+            value="${releng.jira.url}/secure/IssueNavigator.jspa?mode=hide&amp;reset=true&amp;pid=${jira.project.id}&amp;query=&amp;summary=true&amp;description=true"/>
+        <attribute
+            key="FilterCustomJqlUrl"
+            value="${releng.jira.url}/issues/?jql=project+in+%28%22${jira.project.key}%22%29+"/>
+      </query>
+      <description>opfx (jira)</description>
+    </setupTask>
   </setupTask>
   <stream name="master"
       label="master"/>
