@@ -6,9 +6,17 @@
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     name="php"
     label="PHP">
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="Variables">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="scope.project.catalog.section.name"
+        value="php"/>
+  </setupTask>
   <project href="corefx.setup#/"/>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
-      href="index:/opfx/projects.setup#/"/>
+      href="index:/org.eclipse.setup#//@projectCatalogs[name='opfx']"/>
   <description></description>
 </setup:Project>

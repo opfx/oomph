@@ -3,9 +3,45 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
+    xmlns:mylyn="http://www.eclipse.org/oomph/setup/mylyn/1.0"
+    xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore"
     name="corefx"
     label="corefx">
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="Tasks">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        location="${git.clone.location}"
+        remoteURI="${git.remote.uri}">
+      <description>Clones the ${scope.project.name} repository</description>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.location}"/>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="${git.remote.uri}"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="${scope.project.name} (all)"
+          url="${git.remote.uri}">
+        <attribute
+            key="state"
+            value="open::closed::"/>
+      </query>
+      <description></description>
+    </setupTask>
+  </setupTask>
+  <stream name="develop"
+      label="develop"/>
   <stream name="master"
       label="master"/>
   <logicalProjectContainer

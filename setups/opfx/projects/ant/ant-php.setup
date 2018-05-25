@@ -3,39 +3,50 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
+    xmlns:mylyn="http://www.eclipse.org/oomph/setup/mylyn/1.0"
+    xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore"
     name="ant-php"
     label="PHP Ant Plugin">
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="Tasks">
     <setupTask
-        xsi:type="setup:CompoundTask"
-        name="Tasks">
-      <setupTask
-          xsi:type="projects:ProjectsImportTask">
-        <sourceLocator
-            rootFolder="${ant-php.git.clone.location}"
-            locateNestedProjects="true"/>
-      </setupTask>
-      <setupTask
-          xsi:type="mylyn:MylynQueriesTask"
-          connectorKind="github"
-          repositoryURL="${opfx.git.remote.uri}"
-          userID="${github.user.id}"
-          password="${github.user.password}">
-        <query
-            summary="${scope.project.name} (all)"
-            url="${opfx.git.remote.uri}">
-          <attribute
-              key="state"
-              value="open::closed::"/>
-        </query>
-        <description></description>
-      </setupTask>
+        xsi:type="git:GitCloneTask"
+        location="${git.clone.location}"
+        remoteURI="${git.remote.uri}">
+      <description>Clones the ${scope.project.name} repository</description>
     </setupTask>
-    <stream
-        name="master"
-        label="master"/>
-    <logicalProjectContainer
-        xsi:type="setup:Project"
-        href="index:/org.eclipse.setup#//@projectCatalogs[name='opfx']/@projects[name='ant']"/>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask"
+        filter="">
+      <sourceLocator
+          rootFolder="${git.clone.location}"/>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="${git.remote.uri}"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="${scope.project.name} (all)"
+          url="${git.remote.uri}">
+        <attribute
+            key="state"
+            value="open::closed::"/>
+      </query>
+      <description></description>
+    </setupTask>
+  </setupTask>
+  <stream name="develop"
+      label="develop"/>
+  <stream name="master"
+      label="master"/>
+  <logicalProjectContainer
+      xsi:type="setup:Project"
+      href="index:/org.eclipse.setup#//@projectCatalogs[name='opfx']/@projects[name='ant']"/>
   <description></description>
 </setup:Project>
