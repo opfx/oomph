@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Project
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    name="oomph"
+    label="Oomph">
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      id="org.opfx.oomph.variables"
+      name="Variables">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="installation.location"
+        excludedTriggers="STARTUP MANUAL"
+        type="FOLDER"
+        name="installation.location"
+        value="${installation.root/tool/oomph/}"
+        storageURI="scope://Installation"
+        label="">
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="workspace.location"
+        excludedTriggers="MANUAL"
+        type="FOLDER"
+        name="workspace.location"
+        value="${workspace.root}${scope.project.name/|lower}"
+        storageURI="scope://Workspace"
+        label="${scope.project.label}'s workspace">
+      <description>The location of the project's workspace</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="jira.project.key"
+        value="OOMPH"
+        storageURI="scope://Workspace"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="jira.project.id"
+        value="10004"
+        storageURI="scope://Workspace"/>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      excludedTriggers="MANUAL"
+      label="Oomph SDK"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.eclipse.oomph.setup.sdk.feature.group"/>
+    <description></description>
+  </setupTask>
+  <stream name="master"
+      label="master"/>
+  <logicalProjectContainer
+      xsi:type="setup:ProjectCatalog"
+      href="index:/org.eclipse.setup#//@projectCatalogs[name='opfx']"/>
+  <description></description>
+</setup:Project>

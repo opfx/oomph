@@ -541,7 +541,7 @@
               </children>
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_G0p-zGAqEeimxK-epfa1EA" containerData="7903" selectedElement="_G0p-zmAqEeimxK-epfa1EA" horizontal="true">
-              <children xsi:type="basic:PartSashContainer" xmi:id="_HdQP0GAqEeimxK-epfa1EA" containerData="4954" selectedElement="_G0ql1mAqEeimxK-epfa1EA">
+              <children xsi:type="basic:PartSashContainer" xmi:id="_HdQP0GAqEeimxK-epfa1EA" containerData="4954" selectedElement="_G0p-zWAqEeimxK-epfa1EA">
                 <children xsi:type="advanced:Placeholder" xmi:id="_G0p-zWAqEeimxK-epfa1EA" elementId="org.eclipse.ui.editorss" containerData="6700" ref="_-k9FkF99EeiqI_iyOhsOSQ"/>
                 <children xsi:type="basic:PartStack" xmi:id="_G0ql1mAqEeimxK-epfa1EA" elementId="bottom" containerData="3300" selectedElement="_G0ql22AqEeimxK-epfa1EA">
                   <tags>org.eclipse.e4.secondaryDataStack</tags>
@@ -667,15 +667,9 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_-k9FkF99EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.editorss" selectedElement="_-k9FkV99EeiqI_iyOhsOSQ">
-      <children xsi:type="basic:PartStack" xmi:id="_-k9FkV99EeiqI_iyOhsOSQ" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_fx3qQGAqEeimxK-epfa1EA">
+      <children xsi:type="basic:PartStack" xmi:id="_-k9FkV99EeiqI_iyOhsOSQ" elementId="org.eclipse.e4.primaryDataStack">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
-        <children xsi:type="basic:Part" xmi:id="_fx3qQGAqEeimxK-epfa1EA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="PhpUnitProgressLogger.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;PhpUnitProgressLogger.java&quot; partName=&quot;PhpUnitProgressLogger.java&quot; title=&quot;PhpUnitProgressLogger.java&quot; tooltip=&quot;ant-php/src/main/java/org/apache/tools/ant/PhpUnitProgressLogger.java&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/ant-php/src/main/java/org/apache/tools/ant/PhpUnitProgressLogger.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;237&quot; selectionTopPixel=&quot;360&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
-          <tags>removeOnHide</tags>
-        </children>
       </children>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_-lJS0l99EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.navigator.ProjectExplorer" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Project Explorer" iconURI="platform:/plugin/org.eclipse.ui.navigator.resources/icons/full/eview16/resource_persp.png" tooltip="" closeable="true">
@@ -699,7 +693,7 @@
     <sharedElements xsi:type="basic:Part" xmi:id="_-lPZcV99EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.views.ResourceNavigator" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Navigator" iconURI="platform:/plugin/org.eclipse.ui.ide/icons/full/eview16/filenav_nav.png" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="org.eclipse.ui.views.navigator.ResourceNavigator"/>
       <persistedState key="originalCompatibilityViewBundle" value="org.eclipse.ui.ide"/>
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view LINK_NAVIGATOR_TO_EDITOR=&quot;0&quot; sorter=&quot;1&quot;>&#xD;&#xA;&lt;filters>&#xD;&#xA;&lt;filter element=&quot;*.class&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;RemoteSystemsConnections&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;RemoteSystemsTempFiles&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;.*&quot; isEnabled=&quot;false&quot;/>&#xD;&#xA;&lt;filter element=&quot;*.pyc&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;*.class&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;*.pyo&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;__pycache__&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;/filters>&#xD;&#xA;&lt;expanded>&#xD;&#xA;&lt;element path=&quot;/ant-php&quot;/>&#xD;&#xA;&lt;element path=&quot;/ant-php/src&quot;/>&#xD;&#xA;&lt;element path=&quot;/ant-php/src/main&quot;/>&#xD;&#xA;&lt;element path=&quot;/ant-php/src/main/java&quot;/>&#xD;&#xA;&lt;element path=&quot;/ant-php/src/main/java/org&quot;/>&#xD;&#xA;&lt;element path=&quot;/ant-php/src/main/java/org/apache&quot;/>&#xD;&#xA;&lt;element path=&quot;/ant-php/src/main/java/org/apache/tools&quot;/>&#xD;&#xA;&lt;element path=&quot;/ant-php/src/main/java/org/apache/tools/ant&quot;/>&#xD;&#xA;&lt;/expanded>&#xD;&#xA;&lt;selection>&#xD;&#xA;&lt;element path=&quot;/ant-php/build.xml&quot;/>&#xD;&#xA;&lt;/selection>&#xD;&#xA;&lt;/view>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view LINK_NAVIGATOR_TO_EDITOR=&quot;0&quot; sorter=&quot;1&quot;>&#xD;&#xA;&lt;filters>&#xD;&#xA;&lt;filter element=&quot;*.class&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;RemoteSystemsConnections&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;RemoteSystemsTempFiles&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;.*&quot; isEnabled=&quot;false&quot;/>&#xD;&#xA;&lt;filter element=&quot;*.pyc&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;*.class&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;*.pyo&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;filter element=&quot;__pycache__&quot; isEnabled=&quot;true&quot;/>&#xD;&#xA;&lt;/filters>&#xD;&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
       <menus xmi:id="_25xQoF9_EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.views.ResourceNavigator">
@@ -1005,7 +999,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_-dfLol99EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_kFU48GApEeimxK-epfa1EA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_-Fx28F99EeiqI_iyOhsOSQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_p1mT0GA8Eei_e_8KSvJaTA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_-Fx28F99EeiqI_iyOhsOSQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_-dfLo199EeiqI_iyOhsOSQ" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -1027,7 +1021,7 @@
       <children xsi:type="menu:ToolBar" xmi:id="_-mCqsF99EeiqI_iyOhsOSQ" elementId="org.eclipse.search.searchActionSet">
         <tags>Draggable</tags>
       </children>
-      <children xsi:type="menu:ToolBar" xmi:id="_7OenEF9_EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.edit.text.actionSet.presentation">
+      <children xsi:type="menu:ToolBar" xmi:id="_7OenEF9_EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.edit.text.actionSet.presentation" visible="false">
         <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_-dfLqF99EeiqI_iyOhsOSQ" elementId="group.nav" toBeRendered="false">
@@ -1036,7 +1030,10 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_-dfLql99EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_kFX8QGApEeimxK-epfa1EA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_-Fx2g199EeiqI_iyOhsOSQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_p1mT3WA8Eei_e_8KSvJaTA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_-Fx2g199EeiqI_iyOhsOSQ"/>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_qByVsGA8Eei_e_8KSvJaTA" elementId="org.eclipse.jdt.ui.CompilationUnitEditor" visible="false">
+        <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_-dfLq199EeiqI_iyOhsOSQ" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -1405,6 +1402,7 @@
     <bindings xmi:id="_lZLtgGApEeimxK-epfa1EA" keySequence="CTRL+TAB" command="_-Flpq199EeiqI_iyOhsOSQ">
       <tags>type:user</tags>
     </bindings>
+    <bindings xmi:id="_pbbgUGA8Eei_e_8KSvJaTA" keySequence="ALT+SHIFT+G" command="_paqrUWA8Eei_e_8KSvJaTA"/>
   </bindingTables>
   <bindingTables xmi:id="_-GWeC199EeiqI_iyOhsOSQ" elementId="org.python.pydev.ui.editor.scope" bindingContext="_-F39A199EeiqI_iyOhsOSQ">
     <bindings xmi:id="_-GWeDF99EeiqI_iyOhsOSQ" keySequence="F2" command="_-FlpE199EeiqI_iyOhsOSQ"/>
@@ -1777,6 +1775,10 @@
   <bindingTables xmi:id="_-lDMh199EeiqI_iyOhsOSQ" bindingContext="_-lDMhl99EeiqI_iyOhsOSQ"/>
   <bindingTables xmi:id="_-lDMiV99EeiqI_iyOhsOSQ" bindingContext="_-lDMiF99EeiqI_iyOhsOSQ"/>
   <bindingTables xmi:id="_-lJS0V99EeiqI_iyOhsOSQ" bindingContext="_-lJS0F99EeiqI_iyOhsOSQ"/>
+  <bindingTables xmi:id="_pzgCEWA8Eei_e_8KSvJaTA" bindingContext="_pzgCEGA8Eei_e_8KSvJaTA"/>
+  <bindingTables xmi:id="_pzgCE2A8Eei_e_8KSvJaTA" bindingContext="_pzgCEmA8Eei_e_8KSvJaTA"/>
+  <bindingTables xmi:id="_pzgCFWA8Eei_e_8KSvJaTA" bindingContext="_pzgCFGA8Eei_e_8KSvJaTA"/>
+  <bindingTables xmi:id="_pzmIsWA8Eei_e_8KSvJaTA" bindingContext="_pzmIsGA8Eei_e_8KSvJaTA"/>
   <rootContext xmi:id="_-E00BF99EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" contributorURI="platform:/plugin/org.eclipse.platform" name="In Dialogs and Windows" description="Either a dialog or a window is open">
     <children xmi:id="_-E00BV99EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.contexts.window" contributorURI="platform:/plugin/org.eclipse.platform" name="In Windows" description="A window is open">
       <children xmi:id="_-E00Bl99EeiqI_iyOhsOSQ" elementId="org.eclipse.e4.ui.contexts.views" contributorURI="platform:/plugin/org.eclipse.platform" name="%bindingcontext.name.bindingView"/>
@@ -1922,6 +1924,10 @@
   <rootContext xmi:id="_-lDMhl99EeiqI_iyOhsOSQ" elementId="org.python.pydev.pyPropertyTrace" name="Auto::org.python.pydev.pyPropertyTrace"/>
   <rootContext xmi:id="_-lDMiF99EeiqI_iyOhsOSQ" elementId="org.zend.php.framework.ZendFrameworkSearchActionSet" name="Auto::org.zend.php.framework.ZendFrameworkSearchActionSet"/>
   <rootContext xmi:id="_-lJS0F99EeiqI_iyOhsOSQ" elementId="org.zend.php.framework.ZendToolActionSet" name="Auto::org.zend.php.framework.ZendToolActionSet"/>
+  <rootContext xmi:id="_pzgCEGA8Eei_e_8KSvJaTA" elementId="org.eclipse.mylyn.dltk.actionSet" name="Auto::org.eclipse.mylyn.dltk.actionSet"/>
+  <rootContext xmi:id="_pzgCEmA8Eei_e_8KSvJaTA" elementId="org.eclipse.mylyn.dltk.actionSet.browsing" name="Auto::org.eclipse.mylyn.dltk.actionSet.browsing"/>
+  <rootContext xmi:id="_pzgCFGA8Eei_e_8KSvJaTA" elementId="org.eclipse.mylyn.java.actionSet" name="Auto::org.eclipse.mylyn.java.actionSet"/>
+  <rootContext xmi:id="_pzmIsGA8Eei_e_8KSvJaTA" elementId="org.eclipse.mylyn.java.actionSet.browsing" name="Auto::org.eclipse.mylyn.java.actionSet.browsing"/>
   <descriptors xmi:id="_-JyMgF99EeiqI_iyOhsOSQ" elementId="org.eclipse.e4.ui.compatibility.editor" allowMultiple="true" category="org.eclipse.e4.primaryDataStack" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor">
     <tags>Editor</tags>
   </descriptors>
@@ -3948,6 +3954,16 @@
   <commands xmi:id="_-azEGF99EeiqI_iyOhsOSQ" elementId="AUTOGEN:::org.python.pydev.debug.VariableViewActions/org.python.pydev.debug.variableViewActions.ShowAllUppercaseReferences" commandName="Show All Uppercase References" description="Show All Uppercase References (those with no lower case letters)" category="_-FfieF99EeiqI_iyOhsOSQ"/>
   <commands xmi:id="_-azEGV99EeiqI_iyOhsOSQ" elementId="AUTOGEN:::org.python.pydev.debug.VariableViewActions/org.python.pydev.debug.variableViewActions.ShowFunctionAndModulsReferences" commandName="Show Function and Module References" description="Show Function and Module References" category="_-FfieF99EeiqI_iyOhsOSQ"/>
   <commands xmi:id="_-azEGl99EeiqI_iyOhsOSQ" elementId="AUTOGEN:::org.python.pydev.navigator.actions.mylyn/org.python.pydev.navigator.actions.mylyn.FilterResourceNavigatorAction" commandName="Focus on Active Task" description="Focus on Active Task (Alt+Click to reveal filtered elements)" category="_-FfieF99EeiqI_iyOhsOSQ"/>
+  <commands xmi:id="_paqrUGA8Eei_e_8KSvJaTA" elementId="org.eclipse.mylyn.java.ui.editor.folding.auto" commandName="Toggle Active Folding" description="Toggle Active Folding" category="_pakksmA8Eei_e_8KSvJaTA"/>
+  <commands xmi:id="_paqrUWA8Eei_e_8KSvJaTA" elementId="org.eclipse.emf.codegen.ecore.ui.Generate" commandName="Generate Code" description="Generate code for the EMF models in the workspace" category="_pakks2A8Eei_e_8KSvJaTA"/>
+  <commands xmi:id="_paqrUmA8Eei_e_8KSvJaTA" elementId="org.eclipse.dltk.mylyn.editor.folding.auto" commandName="Toggle Active Folding" description="Toggle Active Folding" category="_pakksWA8Eei_e_8KSvJaTA"/>
+  <commands xmi:id="_pvu8YGA8Eei_e_8KSvJaTA" elementId="AUTOGEN:::org.eclipse.mylyn.dltk.actionSet.browsing/org.eclipse.dltk.mylyn.actions.ApplyMylynToBrowsingPerspectiveAction" commandName="Focus Browsing Perspective" description="Focus Script Browsing Views on Active Task" category="_-FfieF99EeiqI_iyOhsOSQ"/>
+  <commands xmi:id="_pvu8YWA8Eei_e_8KSvJaTA" elementId="AUTOGEN:::org.eclipse.mylyn.java.actionSet.browsing/org.eclipse.mylyn.java.ui.actions.ApplyMylynToBrowsingPerspectiveAction" commandName="Focus Browsing Perspective" description="Focus Java Browsing Views on Active Task" category="_-FfieF99EeiqI_iyOhsOSQ"/>
+  <commands xmi:id="_pv1DAGA8Eei_e_8KSvJaTA" elementId="AUTOGEN:::org.eclipse.mylyn.dltk.explorer.contribution/org.eclipse.mylyn.dltk.actions.focus.packageExplorer" commandName="Focus on Active Task" description="Focus on Active Task (Alt+click to reveal filtered elements)" category="_-FfieF99EeiqI_iyOhsOSQ"/>
+  <commands xmi:id="_pv1DAWA8Eei_e_8KSvJaTA" elementId="AUTOGEN:::org.eclipse.dltk.mylyn.markers.breakpoints.contribution/org.eclipse.dltk.mylyn.actions.focus.markers.breakpoints" commandName="Focus on Active Task" description="Focus on Active Task" category="_-FfieF99EeiqI_iyOhsOSQ"/>
+  <commands xmi:id="_pv1DAmA8Eei_e_8KSvJaTA" elementId="AUTOGEN:::org.eclipse.mylyn.ui.debug.view.contribution/org.eclipse.mylyn.ui.actions.FilterResourceNavigatorAction" commandName="Focus on Active Task (Experimental)" description="Focus on Active Task (Experimental)" category="_-FfieF99EeiqI_iyOhsOSQ"/>
+  <commands xmi:id="_pv1DA2A8Eei_e_8KSvJaTA" elementId="AUTOGEN:::org.eclipse.mylyn.java.ui.markers.breakpoints.contribution/org.eclipse.mylyn.java.ui.actions.focus.markers.breakpoints" commandName="Focus on Active Task" description="Focus on Active Task" category="_-FfieF99EeiqI_iyOhsOSQ"/>
+  <commands xmi:id="_pv1DBGA8Eei_e_8KSvJaTA" elementId="AUTOGEN:::org.eclipse.mylyn.java.explorer.contribution/org.eclipse.mylyn.java.actions.focus.packageExplorer" commandName="Focus on Active Task" description="Focus on Active Task (Alt+click to reveal filtered elements)" category="_-FfieF99EeiqI_iyOhsOSQ"/>
   <addons xmi:id="_-E00C199EeiqI_iyOhsOSQ" elementId="org.eclipse.e4.core.commands.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_-E00DF99EeiqI_iyOhsOSQ" elementId="org.eclipse.e4.ui.contexts.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_-E00DV99EeiqI_iyOhsOSQ" elementId="org.eclipse.e4.ui.bindings.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
@@ -3959,7 +3975,7 @@
   <addons xmi:id="_-E00E199EeiqI_iyOhsOSQ" elementId="MinMax Addon" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_-E00FF99EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_-FBBQF99EeiqI_iyOhsOSQ" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_pcTDAGA8Eei_e_8KSvJaTA" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <categories xmi:id="_-FfiYF99EeiqI_iyOhsOSQ" elementId="org.eclipse.ui.category.edit" name="Edit"/>
   <categories xmi:id="_-FfiYV99EeiqI_iyOhsOSQ" elementId="org.eclipse.mylyn.wikitext.ui.editor.category" name="WikiText Markup Editing Commands" description="commands for editing lightweight markup"/>
@@ -4011,4 +4027,7 @@
   <categories xmi:id="_-Ffij199EeiqI_iyOhsOSQ" elementId="org.eclipse.gef.category.view" name="View" description="View"/>
   <categories xmi:id="_-FfikF99EeiqI_iyOhsOSQ" elementId="org.eclipse.jdt.ui.category.source" name="Source" description="Java Source Actions"/>
   <categories xmi:id="_-FfikV99EeiqI_iyOhsOSQ" elementId="org.eclipse.dltk.ui.category.refactoring" name="Refactor - DLTK" description="DLTK Refactoring Actions"/>
+  <categories xmi:id="_pakksWA8Eei_e_8KSvJaTA" elementId="org.eclipse.dltk.mylyn.commands" name="DLTK Context" description="DLTK Task-Focused Interface Commands"/>
+  <categories xmi:id="_pakksmA8Eei_e_8KSvJaTA" elementId="org.eclipse.mylyn.java.ui.commands" name="Java Context" description="Java Task-Focused Interface Commands"/>
+  <categories xmi:id="_pakks2A8Eei_e_8KSvJaTA" elementId="org.eclipse.emf.codegen.ecore.ui.Commands" name="EMF Code Generation" description="Commands for the EMF code generation tools"/>
 </application:Application>
