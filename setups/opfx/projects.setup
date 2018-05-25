@@ -269,6 +269,10 @@
           name="org.eclipse.mylyn.versions.feature.group"/>
       <requirement
           name="org.eclipse.mylyn.wikitext_feature.feature.group"/>
+      <requirement
+          name="org.eclipse.mylyn.java_feature.feature.group"/>
+      <requirement
+          name="org.eclipse.mylyn.team_feature.feature.group"/>
       <repository
           url="http://download.eclipse.org/egit/github/updates/"/>
       <repository
@@ -300,6 +304,8 @@
       <requirement
           name="com.zend.php.productivity.feature.group"
           versionRange="13.6.0"/>
+      <requirement
+          name="org.eclipse.php.mylyn.feature.group"/>
       <repository
           url="http://downloads.zend.com/studio-eclipse/updates/win-13+"/>
       <description>Install the tools needed in the IDE to work with PHP projects</description>
